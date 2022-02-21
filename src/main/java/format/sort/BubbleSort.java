@@ -7,26 +7,29 @@ package format.sort;//属于交换排序
 
 public class BubbleSort{
 
-	public BubbleSort(int[] array) {
+	public static void BubbleSort(int[] array) {
 		bubbleSort(array);
 	}
 
 	/**
 	 * flag 用户及时停止， 避免无必要的比较 时间复杂度为 o(n2)
 	 */
-	public void bubbleSort(int[] array) {
-		boolean flag = true;
-		for( int i =0; i < array.length-1 && flag; i++ ) {    // n-1 轮
-			flag =false;
-			for( int j =0; j < array.length-i-1; j++ ){  //每次比较 n- i 次
-				if( array[j] > array[j+1]) {
+	public static void bubbleSort(int[] array) {
+		boolean flag = false;
+
+		// 外层循环应该是从最右边依次向左缩小，每一次都是将最后固定
+		for(int i = array.length-1; i>0 && !flag; i--){
+			flag = true;
+			for(int j = 0; j <= i-1; j++){
+				if(array[j] > array[j+1]){
 					int temp = array[j];
-					array[j] =array[j+1];
-					array[j+1] =temp;
-					flag =true;
+					array[j] = array[j+1];
+					array[j+1] = temp;
+					flag = false;
 				}
 			}
 		}
+
 	}
 
 }

@@ -8,22 +8,23 @@ import java.util.Set;
 /**
  * desc: 找到两个链表的第一个公共节点
  */
-public class SameNode {
+public class SameNodeOfTwoList {
 
     /**
      * 借助集合，效率较低
      */
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
         Set<ListNode> listNodeSet = new HashSet<>();
         while(headA != null ){
             listNodeSet.add(headA);
             headA = headA.next;
         }
         while(headB != null){
-            if(listNodeSet.contains(headB))
+            if(listNodeSet.contains(headB)){
                 return headB;
-            else
+            } else{
                 headB = headB.next;
+            }
         }
         return null;
     }
@@ -34,7 +35,7 @@ public class SameNode {
      *  （2）假设链表B的长度为 b +  c
      *   (3) 两者走的长度都是：  a + b + c
      */
-    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode A = headA;
         ListNode B = headB;
         while(A != B){

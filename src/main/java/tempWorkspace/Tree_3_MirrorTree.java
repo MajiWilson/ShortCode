@@ -1,8 +1,8 @@
 package tempWorkspace;
 
 import com.sun.deploy.panel.ITreeNode;
+import entity.Tree;
 import entity.TreeNode;
-import utils.Tree;
 
 import java.util.LinkedList;
 import java.util.Queue;

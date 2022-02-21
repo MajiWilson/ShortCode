@@ -8,24 +8,31 @@ import entity.TreeNode;
  */
 public class TreeLength {
 
-    public int maxLen = 0;
+    public static int maxLength = 0;
 
-    // 计算最长节点长度，然后减1即可
-    public int diameterOfBinaryTree(TreeNode root) {
-        findMaxPath(root);
-        return maxLen == 0 ? 0 : maxLen - 1;
+    public static int getLongestLength(TreeNode root){
+        maxLength = 0;
+        dfs(root);
+        return maxLength;
+
     }
 
-    public int findMaxPath(TreeNode root){
+    /**
+     * 思路：
+     *  最长路径要么过根节点， 要么不过，第二种需要在中间遍历每个节点时进行判断和更更新
+     * 返回结果是以root为起点的最长路径，
+     * @param root
+     * @return
+     */
+    public static int dfs(TreeNode root){
         if(root == null){
             return 0;
         }
-        int leftLen = findMaxPath(root.left) + 1;
-        int rightLen = findMaxPath(root.right) + 1;
-        if(leftLen + rightLen - 1 > maxLen){ // 更新最大的
-            maxLen = leftLen+rightLen-1;
+        int leftMaxLength = dfs(root.left);
+        int rightMaxLength = dfs(root.right);
+        if(leftMaxLength + rightMaxLength + 1 > maxLength){
+            maxLength = leftMaxLength + rightMaxLength + 1;
         }
-        return Math.max(leftLen, rightLen); //递归选择更大的长度
-
+        return leftMaxLength > rightMaxLength ? leftMaxLength + 1 : rightMaxLength +1 ;
     }
 }

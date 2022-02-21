@@ -11,45 +11,45 @@ import java.util.Queue;
  */
 
 public class MinDepth {
-    /**
-     *  bfs , 层序遍历
-     */
-    public int minDepth(TreeNode root) {
-        if(root == null)
-            return 0;
-        int depth = 1;
-        TreeNode curNode = root;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(curNode);
-        while(!queue.isEmpty()){
-            int num = queue.size();
-            for(int i = 0 ; i< num ;i++){ // 注意这里容易犯错如果写成 for(int i = 0 ; i< group.size() ; i++) 是错的因为队列大小在动态变化
-                curNode = queue.poll();
-                if(curNode.left == null && curNode.right == null){
-                    return depth;
-                }
-                if(curNode.left != null){
-                    queue.offer(curNode.left);
-                }
-                if(curNode.right != null ){
-                    queue.offer(curNode.right);
-                }
-            }
-            depth++;
-        }
-        return depth;
-    }
 
     /**
      *  递归方法
      */
-    public int minDepth2(TreeNode root) {
-        if(root==null)  //递归出口1， 空节点
+    public static int minDepth1(TreeNode root){
+        if(root == null){
             return 0;
-        if(root.left == null && root.right == null){  // 递归出口2，叶子节点
-            return 1;
         }
-        return Math.min(minDepth2(root.left), minDepth2(root.right)) + 1;
+        return Math.min(minDepth1(root.left), minDepth1(root.right)) + 1;
+    }
 
+    /**
+     * 非递归方法：遍历， 找到第一个叶子节点就停止
+     * @param root
+     * @return
+     */
+    public static int minDepth2(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int depth = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            depth++;
+            int size = queue.size();
+            for(int i = 0 ; i< size; i++){
+                TreeNode cur = queue.poll();
+                if(cur.left == null && cur.right == null){
+                    return depth;
+                }
+                if(cur.left != null ){
+                    queue.offer(cur.left);
+                }
+                if(cur.right != null){
+                    queue.offer(cur.right);
+                }
+            }
+        }
+        return depth;
     }
 }

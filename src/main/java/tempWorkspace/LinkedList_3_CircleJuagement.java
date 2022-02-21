@@ -1,6 +1,7 @@
 package tempWorkspace;
 
-import utils.Node;
+
+import entity.Node;
 
 /**
  * Class: ����ж�һ���������Ƿ��л���

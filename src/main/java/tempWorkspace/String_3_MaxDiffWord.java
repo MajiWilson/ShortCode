@@ -1,6 +1,6 @@
 package tempWorkspace;
 
-import utils.RandomWord;
+
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ public class String_3_MaxDiffWord {
         int n = input.nextInt();
         String[] words=new String[n];
         for(int i=0;i<n;i++){
-            words[i] = RandomWord.getRandomWord();
+            words[i] = "";
         }
         System.out.println("Words:");
         int count =0;

@@ -1,6 +1,7 @@
 package ds_type.set;
 
-import sort.BigHeap;
+
+import format.sort.BigHeap;
 
 /**
  * Class:

@@ -1,6 +1,5 @@
 package ds_type.array;
 
-import utils.CollectionMy;
 
 import java.util.List;
 

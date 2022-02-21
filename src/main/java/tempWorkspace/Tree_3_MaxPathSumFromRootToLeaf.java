@@ -1,7 +1,7 @@
 package tempWorkspace;
 
+import entity.Tree;
 import entity.TreeNode;
-import utils.Tree;
 
 /**
  * Class: ����Ӹ��ڵ㵽Ҷ�ӽڵ�����·���ͣ��ݹ��˼�롣

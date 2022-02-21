@@ -1,6 +1,5 @@
 package tempWorkspace;
 
-import thread.ConsumerAndProducer;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

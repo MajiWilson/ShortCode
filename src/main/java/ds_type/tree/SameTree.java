@@ -9,13 +9,14 @@ import entity.TreeNode;
  */
 public class SameTree {
 
-    //逻辑： 树相同，不仅根节点值相同， 左右子树都相同
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p == null && q == null) //递归出口1
+    public static boolean isSameTree(TreeNode root1, TreeNode root2){
+        if(root1 == null && root2 == null){
             return true;
-        if( p == null || q == null || p.val != q.val) // 递归出口2
+        }
+        if(root1 == null || root2 == null || root1.val != root2.val){
             return false;
-        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right); //左右子树都应该是相同的
+        }
 
+        return isSameTree(root1.left, root2.left) && isSameTree(root1.right, root2.right);
     }
 }

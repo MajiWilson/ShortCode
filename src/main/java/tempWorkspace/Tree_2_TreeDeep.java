@@ -1,7 +1,7 @@
 package tempWorkspace;
 
+import entity.Tree;
 import entity.TreeNode;
-import utils.Tree;
 
 import java.util.LinkedList;
 import java.util.Queue;

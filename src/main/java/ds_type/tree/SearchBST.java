@@ -8,20 +8,31 @@ import entity.TreeNode;
  */
 public class SearchBST {
 
-    //非递归写法
+    /**
+     * 非递归
+     */
     public TreeNode searchBST(TreeNode root, int val) {
-        while(root != null){
-            if(root.val == val)
-                break;
-            if(root.val < val)
-                root = root.right;
-            else
+        TreeNode cur = root;
+        while(cur != null){
+            if(root.val == val ){
+                return cur;
+            }
+            if(root.val > val){
                 root = root.left;
+            } else {
+                root = root.right;
+            }
         }
-        return root;
+        return null;
+
     }
 
-    //递归写法
+    /**
+     * 递归
+     * @param root
+     * @param val
+     * @return
+     */
     public TreeNode searchBST2(TreeNode root, int val) {
         if (root == null){
             return null;

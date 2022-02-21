@@ -27,10 +27,12 @@ public class LevelOrder {
             for(int i = 0 ; i< size; i++){
                 curNode = queue.poll();
                 level.add(curNode.val);
-                if(curNode.left != null)
+                if(curNode.left != null){
                     queue.offer(curNode.left);
-                if(curNode.right != null)
+                }
+                if(curNode.right != null){
                     queue.offer((curNode.right));
+                }
             }
             res.add(level);
         }

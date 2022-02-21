@@ -1,6 +1,5 @@
 package format.slide_window;
 
-import array.CardGame;
 
 public class Test {
 

@@ -31,8 +31,12 @@ public class CommonAncestorInBST {
     }
 
     public List<TreeNode> getPath(TreeNode root, TreeNode target){
+       if(root == null || target == null){
+           return null;
+       }
         List<TreeNode> path = new ArrayList<>();
         TreeNode curNode = root;
+        // 判断条件是比较节点相等
         while(curNode != target){
             path.add(curNode);
             if(curNode.val > target.val){
@@ -50,15 +54,15 @@ public class CommonAncestorInBST {
      * 递归算法： 上述的效果并不是很好， 这里进一步借助其性质改善
      */
     public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
-        if(root.val > p.val && root.val > q.val){
-            return lowestCommonAncestor2(root.left, p, q);
-        }
-        else if(root.val < p.val && root.val < q.val){
-            return lowestCommonAncestor(root.right, p, q);
-        }
-        else{
-            return root;
-        }
+        // 两个节点要么在左侧，要么在右侧，要么在两边，第三种情况必然root就是最近公共祖先
+       if(root.val > p.val && root.val > q.val){
+           return lowestCommonAncestor2(root.left, p, q);
+       }
+       if(root.val < p.val && root.val < q.val){
+           return lowestCommonAncestor2(root.right, p , q);
+       }
+       return root;
+
     }
 
 

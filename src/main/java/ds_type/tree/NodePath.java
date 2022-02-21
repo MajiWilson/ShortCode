@@ -1,5 +1,6 @@
 package ds_type.tree;
 
+import entity.ListNode;
 import entity.TreeNode;
 
 import java.util.ArrayList;
@@ -11,23 +12,22 @@ import java.util.List;
 public class NodePath {
 
 
-    public List<TreeNode> getPath(TreeNode root, TreeNode target){
+    public static List<TreeNode> getPath(TreeNode root, TreeNode target){
         List<TreeNode> path = new ArrayList<>();
         if(root ==null || target == null)
             return path;
         findPath(root, target, path);
-        path.add(target);
         return path;
     }
 
     /**
      * 前序遍历： 如果找到该节点直接返回，没有找到则从孩子上找， 如果孩子上也没找到，则这个子树上就没有找到
      */
-    public boolean findPath(TreeNode root, TreeNode target, List<TreeNode> path){
+    public static boolean findPath(TreeNode root, TreeNode target, List<TreeNode> path){
+        path.add(root);
         if(root == target){
             return true;
         }
-        path.add(root);
         boolean res = false;
         if(root.left!= null){
             res = findPath(root.left, target, path);
@@ -35,8 +35,9 @@ public class NodePath {
         if(!res && root.right != null){
             res = findPath(root.right, target, path);
         }
+        // 这个子树不在路径上需要删掉
         if(!res){
-            path.remove(path.size()-1); // 这个子树不在路径上需要删掉
+            path.remove(path.size()-1);
         }
         return res;
     }

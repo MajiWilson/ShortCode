@@ -8,44 +8,35 @@ import entity.ListNode;
  */
 public class FindMidNode {
 
-    public ListNode middleNode(ListNode head) {
-        if(head == null)
-            return null;
-        ListNode slow = head;
-        ListNode fast = head;
-        while(true){
-            if(fast.next!=null && fast.next.next!=null){
-                fast = fast.next.next;
-            }
-            else if(fast.next != null){ // 如果不够两步则直走一步到头
-                fast = fast.next;
-            }
-            else{ // fast.next == null;
-                break;
-            }
-            slow = slow.next;
-        }
-        return slow;
-    }
-
     /**
-     * 简单的优化代码
+     * 快慢指针
+     * @param head
+     * @return
      */
-    public ListNode middleNode2(ListNode head) {
-        if (head == null) {
-            return null;
+    public static ListNode findMid(ListNode head){
+        if(head == null || head.next == null){
+            return head;
         }
-        ListNode slow = head;
         ListNode fast = head;
-        while (fast != null) {
-            if (fast.next == null) {
+        ListNode slow = head;
+        while(true){
+            if(fast == null || fast.next == null){
                 return slow;
             }
-            if(fast.next.next==null){
-                return slow.next;
-            }
-            slow = slow.next;
             fast = fast.next.next;
+            slow = slow.next;
+        }
+    }
+
+    public static ListNode findMid2(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
         }
         return slow;
     }

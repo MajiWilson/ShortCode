@@ -43,24 +43,24 @@ public class BSTToLinkedList {
 
     /**
      * 方法2： 在遍历的时候就开始 调整， 使用头插法， 所以顺序不是典型的左 中  右 而是 右 中 左，
-     * 如果使用尾插法则左 中 右 且需要位置一个尾指针；
+     * 如果使用尾插法则左 中 右 且需要维持一个尾指针；
      */
-    TreeNode list = null;
-    public TreeNode Convert2(TreeNode pRootOfTree) {
-        if(pRootOfTree == null)
-            return pRootOfTree;
-        Convert(pRootOfTree.right);
-        if(list == null){
-            list = pRootOfTree;
-        } else {
-            list.left = pRootOfTree;
-            pRootOfTree.right = list;
-            list = pRootOfTree;
+    TreeNode tail = null;
+
+    public TreeNode convert2(TreeNode root) {
+        if(root == null){
+            return null;
         }
-        Convert(pRootOfTree.left);
+        convert2(root.right);
 
-        return list;
+        if(tail == null){
+            tail = root;
+        } else {
+            root.right = tail;
+            tail.left = root;
+            tail = root;
+        }
+        convert2(root.left);
+        return tail;
     }
-
-
 }

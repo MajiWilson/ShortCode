@@ -7,7 +7,8 @@ package format.sort;
 public class InsertSort{
 	
 	public static void insertSort(int[] array) {
-		for(int i = 1; i < array.length; i++) {  // 第一个不用管
+		//第一个不用排序
+		for(int i = 1; i < array.length; i++) {
 			int temp = array[i];
 			int j;
 			for(j = i-1; j >=0 && array[j] > temp; j--) {  // 找到第一个小于等于 temp 的节点，之前的右移动

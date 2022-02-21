@@ -20,10 +20,12 @@ public class SymmetricTree {
      *      （2）形状相同，即对称位置的节点比较应该相同
      */
     public boolean compare(TreeNode lNode, TreeNode rNode){
-        if(lNode == null && rNode == null)
+        if(lNode == null && rNode == null){
             return true;
-        if(lNode == null || rNode == null || lNode.val != rNode.val )
+        }
+        if(lNode == null || rNode == null || lNode.val != rNode.val ){
             return false;
+        }
         return compare(lNode.left, rNode.right) && compare(lNode.right, rNode.left);
     }
 

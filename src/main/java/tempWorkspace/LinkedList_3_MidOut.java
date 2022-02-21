@@ -1,6 +1,8 @@
 package tempWorkspace;
 
-import utils.Node;
+
+
+import entity.Node;
 
 import java.util.ArrayList;
 import java.util.List;

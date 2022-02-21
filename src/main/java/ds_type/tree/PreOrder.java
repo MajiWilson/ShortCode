@@ -39,21 +39,21 @@ public class PreOrder {
         }
         Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
-        TreeNode curNode;
+        // 注意应该是先将有孩子放入栈中, 入栈的都是没有访问过的
         while(!stack.isEmpty()){
-            curNode = stack.pop();
-            res.add(curNode.val);
-            if(curNode.right != null){      // 注意这里右节点先入栈，后弹出
-                stack.push(curNode.right);
+            TreeNode cur = stack.pop();
+            res.add(cur.val);
+            if(cur.right != null){
+                stack.push(cur.right);
             }
-            if(curNode.left!= null){
-                stack.push(curNode.left);
+            if(cur.left != null){
+                stack.push(cur.left);
             }
         }
         return res;
     }
     /**
-     * 非递归算法2：借助栈
+     * 非递归算法2：
      */
     public List<Integer> preorderTraversal3(TreeNode root) {
         List<Integer> res = new ArrayList<>();
@@ -62,15 +62,17 @@ public class PreOrder {
         }
         Deque<TreeNode> stack = new ArrayDeque<>();
         TreeNode curNode = root;
-        while(curNode != null || !stack.isEmpty()){   // 这种方法的逻辑是先一直遍历到最左边，同时将根节点加入结果，并入栈，然后弹出查看有节点，重复此过程。
-            if(curNode!=null){
-                res.add(curNode.val);
-                stack.push(curNode);
-                curNode = curNode.left;
-            }
-            else{
-                curNode = stack.pop().right;
-            }
+        // 这种方法的逻辑是先一直遍历到最左边，同时将根节点加入结果，并入栈，然后弹出查看有节点，重复此过程。
+        // 入栈的都是已经访问过的节点，后面依次推出来看是否右孩子， 需要维持一个遍历指针
+        while(curNode != null || !stack.isEmpty()){
+           if(curNode != null){
+               stack.push(curNode);
+               res.add(curNode.val);
+               curNode = curNode.left;
+           } else{
+               //没有左孩子, 如果右孩子在的话再去看
+               curNode = stack.pop().right;
+           }
         }
         return res;
     }

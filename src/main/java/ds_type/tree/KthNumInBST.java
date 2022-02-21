@@ -1,6 +1,10 @@
 package ds_type.tree;
 
+import entity.ListNode;
 import entity.TreeNode;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * desc: 给定一棵二叉搜索树，请找出其中第k大的节点
@@ -38,18 +42,23 @@ public class KthNumInBST {
      * 方法2： 引入全局变量，中序遍历（ right -> root ->left ), 时间复杂度为 O（k)
      *
      */
-    int res, k;
-    public int kthLargest2(TreeNode root, int k) {
-        this.k = k;
-        dfs(root);
-        return res;
-    }
-    public void dfs(TreeNode root) {
-        if(root == null || k == 0) // 递归出口，空节点或者已经变量了前面K大的节点了，
-            return;
-        dfs(root.right);
-        if(--k == 0)
-            res = root.val;
-        dfs(root.left);
+
+    public static int kthLargest3(TreeNode root , int k){
+
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode cur = root;
+        // 反向的中序遍历
+        while(cur != null || !stack.isEmpty()){
+            if(cur != null){
+                stack.push(cur);
+                cur = cur.right;
+            } else {
+                if(--k == 0){
+                    return stack.peek().val;
+                }
+                cur = stack.pop().left;
+            }
+        }
+        return -1;
     }
 }

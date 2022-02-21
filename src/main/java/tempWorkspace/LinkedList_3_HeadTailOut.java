@@ -1,6 +1,7 @@
 package tempWorkspace;
 
-import utils.Node;
+
+import entity.Node;
 
 import java.util.LinkedList;
 import java.util.List;

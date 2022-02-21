@@ -23,8 +23,9 @@ public class InOrder {
     }
 
     public void dfs(TreeNode root, List<Integer> res){
-        if(root == null)
+        if(root == null){
             return;
+        }
         dfs(root.left, res);
         res.add(root.val);
         dfs(root.right, res);
@@ -36,19 +37,19 @@ public class InOrder {
      */
     public List<Integer> inorderTraversal2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        if(root == null)
+        if(root == null){
             return res;
+        }
         Deque<TreeNode> stack = new ArrayDeque<>();
         TreeNode curNode = root;
         while(curNode != null || !stack.isEmpty()){
             if(curNode != null){
                 stack.push(curNode);
                 curNode = curNode.left;
-            }
-            else{
-                curNode = stack.pop();
-                res.add(curNode.val);
-                curNode = curNode.right;
+            } else{
+                //没有左孩子(或左孩子已经被访问过），可以直接访问该节点了， 访问过的节点需要出栈
+                res.add(stack.peek().val);
+                curNode = stack.pop().right;
             }
         }
         return res;

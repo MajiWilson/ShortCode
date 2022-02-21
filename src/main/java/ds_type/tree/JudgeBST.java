@@ -13,6 +13,7 @@ public class JudgeBST {
         if(sequence.length <= 1)
             return true;
         return judge(sequence, 0, sequence.length-2, sequence[sequence.length-1]);
+
     }
 
     public boolean judge(int[] arr, int start, int end, int root){

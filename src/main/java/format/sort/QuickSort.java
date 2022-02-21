@@ -1,53 +1,64 @@
 package format.sort;
 
+/**
+ * 快速排序
+ */
 public class QuickSort {
-	public void quickSort(int[] array){
-		quickSort(array, 0, array.length-1);
 
+	/**
+	 * 排序接口
+	 * @param array
+	 */
+	public static void quickSort(int[] array){
+		quickSort(array, 0, array.length-1);
 	}
-	public void quickSort(int[] array, int left, int right){
-		if( left < right){
+
+	/**
+	 * 分治法: 注意位置p后续不参与排序比较，已经是最终位置！
+	 * @param array
+	 * @param left
+	 * @param right
+	 */
+	public static void quickSort(int[] array, int left, int right){
+		if(left < right){
 			int p = partition(array, left, right);
-			quickSort(array, left, p);
+			quickSort(array, left, p-1);
 			quickSort(array, p+1, right);
 		}
 	}
 
-	public int partition(int[] array, int left, int right){
-		int i = left; // 遍历指针
-		int j = left -1; //最后一个小于比较值的指针
-		int pivot = array[right];
+	/**
+	 * 分治位置确定:
+	 * @param array
+	 * @param left
+	 * @param right
+	 * @return
+	 */
+	public static int partition(int[] array, int left, int right){
+		//遍历指针
+		int i = left;
+		//最近一个小与比较值的位置
+		int j = left-1;
+		// 比较值选择最右值:这个值不会参与交换，最后需要放到中间
+		int compareNum = array[right];
+
 		while(i < right){
-			if(array[i] < pivot){
+			if(array[i] <  compareNum){
 				j++;
-				int tmp = array[i];
+				int temp = array[i];
 				array[i] = array[j];
-				array[j] = tmp;
+				array[j] = temp;
 			}
 			i++;
 		}
+		// 确定界位**
 		j++;
 		array[right] = array[j];
-		array[j] = pivot;
+		array[j] = compareNum;
 		return j;
 	}
 
-	public int partition2(int[] array, int left, int right){
-		int pivot = array[right];
-		while(left < right){
-			if(array[left] > array[right]){	// 交换， 其中一个指针失踪值得是pivot
-				int tmp = array[left];
-				array[left] = array[right];
-				array[right] = tmp;
-			}
-			if (array[left] == pivot) {		// 判断是哪一个指针是pivot, 则另一个指针向中间靠拢
-				right--;
-			} else {
-				left++;
-			}
-		}
-		return left;
-	}
+
 
 
 }

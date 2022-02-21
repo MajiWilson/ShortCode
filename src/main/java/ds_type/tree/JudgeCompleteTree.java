@@ -18,12 +18,14 @@ public class JudgeCompleteTree {
         if(root == null)
             return true;
         queue.offer(root);
+        // 标识是已经出现了null, 后面就应该否是空的，
         boolean flag = false;
         while(!queue.isEmpty()){
             TreeNode curNode = queue.poll();
             if(curNode != null){
-                if(flag == true)
+                if(flag == true){
                     return false;
+                }
                 queue.add(curNode.left);
                 queue.add(curNode.right);
             }else{
