@@ -14,30 +14,31 @@ public class DeleteRepeat {
     /**
      * 使用栈，每次和栈顶元素进行比较
      */
-    public String removeDuplicates(String S) {
+    public static String removeDuplicates(String S) {
         char[] chars = S.toCharArray();
         Stack<Character> letters = new Stack<>();
-        for(int i = 0 ;i < chars.length ; i++ ){
-            if(!letters.isEmpty() && chars[i] == letters.peek() ){
+        for(int i = 0 ;i< chars.length; i++){
+            if(letters.isEmpty() || letters.peek() != chars[i]){
+                letters.push(chars[i]);
+            } else{
                 letters.pop();
             }
-            else {
-                letters.push(chars[i]);
-            }
         }
-        StringBuilder result= new StringBuilder();
-        while( !letters.isEmpty() ){
-            result.append( letters.pop());
+        StringBuilder sb = new StringBuilder();
+        while(!letters.isEmpty()){
+            sb.append(letters.pop());
         }
-        return result.reverse().toString();
-
+        return sb.reverse().toString();
     }
 
     /**
      *双指针， 一个指向最终位置，不断更新，  一个指向遍历位置，不断向前
      */
-    public String removeDuplicates2(String S){
+    public static String removeDuplicates2(String S){
         int n = S.length();
+        if( n == 1){
+            return S;
+        }
         char[] letters = S.toCharArray();
         int j = 0;
         for( int i =0 ; i < n ; i++, j++){
@@ -46,7 +47,15 @@ public class DeleteRepeat {
                 j -= 2;  // 两个都不要，指针后退
             }
         }
+        System.out.println(j);
+        if(j <= 0){
+            return "null";
+        }
         return new String(letters, 0, j);
+
+
+
+
     }
 
 

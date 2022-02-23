@@ -1,6 +1,7 @@
 package ds_type.array;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,6 +30,24 @@ public class SubSet {
         }
         return res;
     }
+
+
+    public static List<List<Integer>> getSubSet(int[] array){
+        List<List<Integer>> res = new ArrayList<>();
+        // 先加入空集
+        res.add(new ArrayList<>());
+        for(int num : array){
+            Iterator<List<Integer>> it = res.iterator();
+            while(it.hasNext()){
+                List<Integer> list = it.next();
+                res.add(new ArrayList<>(list));
+                list.add(num);
+                res.add(list);
+            }
+        }
+        return res;
+    }
+
 
     /**
      * 方法1 优化：res只要不断增加新的列表即可
