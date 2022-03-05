@@ -16,6 +16,7 @@ public class OutputSquareIncArray {
         for(int i = 0; i< A.length; i++ ){
             A[i] = A[i]*A[i];
         }
+
         while(left <= right){
             if(A[left] >= A[right]){
                 result[index--] = A[left];

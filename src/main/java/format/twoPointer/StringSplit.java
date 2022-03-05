@@ -14,59 +14,36 @@ import java.util.List;
  * @Date 2020/8/13 10:39
  **/
 public class StringSplit {
-    public static void main(String[] args){
-        String s = "caedbdedda" ;
-        List<Integer> list = partitionLabels(s);
-        for(Integer i : list){
-            System.out.println(i);
-        }
-    }
-    /* 双指针，同向，  一个执行开始，一个指向最前沿，还有一个工作指针，
-    从开始位置出发，每次都会去找当前字符的最后位置，更新前沿，*/
-    public static List<Integer> partitionLabels(String S) {
-        List<Integer> res = new ArrayList<>();
-        char[] letters = S.toCharArray();
-        int n = letters.length;
-        int base = 0;
-        int frontier =-1;
-        for(int i = 0; i< n ;i++ ){
-            if(frontier < i && frontier!=-1){
-                res.add(frontier - base +1);
-                base= i;
-                frontier = -1;
-            }
-            char focusChar = letters[i];
-            for(int j = n-1; j>=base; j--){
-                if(letters[j] == focusChar){
-                    if( j == n-1){
-                        res.add(j-base +1);
-                        return res;
-                    }
-                    if(j > frontier)
-                        frontier = j;
-                    break;
-                }
-            }
-        }
-        return res;
-    }
 
-    /*双指针，优化时间，避免每次从尾部扫描的重复工作，而是先保存每个字符最后出现的最后一次位置即可last[] */
-    public List<Integer> partitionLabels2(String S) {
-        int[] last = new int[26];
-        for (int i = 0; i < S.length(); i++) {
-            last[S.charAt(i) - 'a'] = i;
+    /**
+     * 对于每一个位置， 看是否是最后一个，不断更新子串的长度， 两次便利，避免重复判断
+     * @param s
+     */
+    public static void split(String s ){
+        System.out.println(s);
+
+
+        List<String> res = new ArrayList<>();
+        int[] lastIdx = new int[26];
+        char[] letters = s.toCharArray();
+        for(int i = 0 ; i< letters.length; i++){
+            lastIdx[letters[i]-'a'] = i;
+        }
+        int start = 0;
+        int end = 0;
+        for(int i = 0; i<letters.length ;i++){
+            end = Math.max(end, lastIdx[letters[i] - 'a']);
+            if(end == i){
+                res.add(s.substring(start, end+1));
+                start = i +1;
+                end = start;
+            }
         }
 
-        int end = 0, start = 0;
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < S.length(); i++) {
-            end = Math.max(end, last[S.charAt(i) - 'a']);
-            if (i == end) {
-                res.add(i - start + 1);
-                start = i + 1;
-            }
+
+        for(String str : res ){
+            System.out.print(str + " ");
         }
-        return res;
+        System.out.println();
     }
 }

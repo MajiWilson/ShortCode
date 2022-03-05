@@ -12,23 +12,23 @@ public class MaxContainer {
     /**
      * 双指针： 向中间靠拢的过程中，不断更新即可，时间复杂度为O（n)
      */
-    public int maxArea(int[] height) {
-        if(height == null || height.length < 2){
+    public static int getMaxArea(int[] height){
+        if(height == null || height.length <= 1){
             return 0;
         }
-        int i = 0;
-        int j = height.length-1;
-        int vol = 0;
-        while( i < j){
-            int tmp = Math.min(height[i], height[j]) * (j - i);
-            vol = tmp > vol ? tmp : vol;
-            if (height[i] > height[j]) {
-                j--;
-            } else {
-                i++;
+        int left = 0;
+        int right = height.length-1;
+        int maxArea = Integer.MIN_VALUE;
+        while(left < right){
+            int tempArea = Math.min(height[left], height[right]) * (right - left);
+            maxArea = maxArea < tempArea ? tempArea : maxArea;
+            if(height[left] > height[right]){
+                right--;
+            } else{
+                left++;
             }
         }
-        return vol;
+        return maxArea;
     }
 
 

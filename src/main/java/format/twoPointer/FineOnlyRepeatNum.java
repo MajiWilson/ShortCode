@@ -31,6 +31,7 @@ public class FineOnlyRepeatNum {
         }
         return i;
     }
+
     /* 因为特殊性，可以用二分查找，结合抽屉原理*/
     public int findDuplicate2(int[] nums) {
         int len = nums.length;

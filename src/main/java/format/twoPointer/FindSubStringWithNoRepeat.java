@@ -1,5 +1,6 @@
 package format.twoPointer;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class FindSubStringWithNoRepeat {
         return max;
     }
     /* 双指针 优化，当然本质没啥区别*/
-    public int lengthOfLongestSubstring2(String s) {
+    public static int lengthOfLongestSubstring2(String s) {
         HashMap<Character,Integer> map = new HashMap<>();
         int left = 0;
         int temp = 0;
@@ -44,6 +45,36 @@ public class FindSubStringWithNoRepeat {
             map.put(ch[i],i);
         }
         return temp;
+    }
+
+
+    public  static String findLongestSubString(String s){
+        int[] index = new int[26];
+        Arrays.fill(index, -1);
+
+        int maxLength = 0;
+        String maxSubStr = "";
+        char[] letters = s.toCharArray();
+        int start = 0;
+        int end = 0;
+        while(end < letters.length){
+            //没有出现过
+            if(index[letters[end] - 'a'] == -1){
+                if(end - start +1 > maxLength){
+                    maxLength = end -start +1;
+                    maxSubStr = s.substring(start, end+1);
+                }
+            } else {
+                //出现过且在起始位置后面需要更新起始位置
+                if(index[letters[end] - 'a'] >= start){
+                    start =index[letters[end] -'a'] + 1;
+                }
+            }
+            //更新索引
+            index[letters[end] - 'a'] = end;
+            end++;
+        }
+        return maxSubStr;
     }
 
 }

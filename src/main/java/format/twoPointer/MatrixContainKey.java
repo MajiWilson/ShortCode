@@ -9,8 +9,11 @@ public class MatrixContainKey {
     /*双指针 从右上角开始找，两个指针i 和 j 分别指向行和列，
      利用矩形自身的特点这样每次都有两个确定的选择，如果从头开始则没有办法确定那个选择
      ，只能不断重复，当然也可以总左下角开始
+
+     这个双指针其实不是严格意义的，只是坐标， 查找效率很高，时间复杂度为 行列数
      */
-    public boolean searchMatrix(int[][] matrix, int target) {
+    public static boolean searchMatrix(int[][] matrix, int target) {
+
         if(matrix.length == 0 || matrix[0].length == 0){
             return false;
         }
@@ -27,6 +30,8 @@ public class MatrixContainKey {
         }
         return false;
     }
+
+
     public boolean searchMatrix2(int[][] matrix, int target) {
         if(matrix.length == 0 || matrix[0].length == 0){
             return false;
@@ -44,4 +49,8 @@ public class MatrixContainKey {
         }
         return false;
     }
+
+
+
+
 }
