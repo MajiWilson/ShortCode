@@ -2,6 +2,7 @@ package format.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,6 +41,39 @@ public class CombinationSum {
             findCombination(candidates, target- candidates[i], combination, res);
             combination.remove(combination.size()-1);
         }
+    }
+
+    /**
+     * 无需排序直接回溯：每一个直接选择区或者不取， 当然如果排序的话可以起到提效的作用
+     * @param num
+     * @param target
+     * @return
+     */
+    public static List<List<Integer>> getCombination(int[] num, int target){
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> combination = new ArrayList<>();
+        backtracking(num, 0, target, combination, res);
+        return res;
+    }
+
+    public static void backtracking(int[] num, int index, int target, List<Integer> combination, List<List<Integer>> res){
+
+        if(target < 0){
+            return;
+        }
+        if(target == 0){
+            res.add(new ArrayList<>(combination));
+            return;
+        }
+        if(index == num.length){
+            return;
+        }
+        // 不取
+        backtracking(num, index +1, target, combination, res);
+        combination.add(num[index]);
+        //取
+        backtracking(num, index+1,target-num[index], combination, res );
+        combination.remove(combination.size()-1);
     }
 
 

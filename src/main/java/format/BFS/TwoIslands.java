@@ -10,133 +10,126 @@ import java.util.*;
  * @Date 2020/8/4 18:19
  **/
 public class TwoIslands {
-    public static void main(String[] args ){
-        int[][] array = {{1,1,1,1,1},
-                        {1,0,0,0,1},
-                        {1,0,1,0,1},
-                        {1,0,0,0,1},
-                        {1,1,1,1,1}};
-        int[][] array2 = {
-                {0,1,0},
-                {0,0,0},
-                {0,0,1}
-        };
-        int[][] array3 = {
-                {0,1},
-                {1,0}
-        };
-        System.out.println(shortestBridge(array));
-        System.out.println(shortestBridge(array2));
-        System.out.println(shortestBridge(array3));
-
-    }
     /*思路，先找一个岛， 然后找到边缘，每次向外扩散一层，并更新边缘， 直至第一次接触 */
-    public static int shortestBridge(int[][] A) {
-        int row = A.length;
-        int col = A[0].length;
-        boolean[][] mark = new boolean[row][col];
-        Queue<int[]> queueIsland = new LinkedList<>();
-        Queue<int[]> queueEdge = new LinkedList<>();
 
-        /* 找到第一个1*/
-        boolean flag = false;
-        for(int i  = 0 ; i< row; i++){
-            for( int j = 0; j < col ;j++){
-                if( A[i][j] == 1){
-                    queueIsland.offer(new int[]{i, j});
-                    mark[i][j]= true;
-                    flag =true;
-                    break;
-                }
-            }
-            if(flag){
-                break;
-            }
-        }
+    public static int getShortestDistance(int[][] area){
+        boolean[][] visited = new boolean[area.length][area[0].length];
+        int[] posIslandOne = getOneIslandStartPos(area);
+        visited[posIslandOne[0]][posIslandOne[1]] = true;
+        Queue<int[]> islandOneEdge = getIslandOneEdge(area, posIslandOne, visited);
+        return spreadIslandOne(area, islandOneEdge, visited);
+    }
 
-        /* use bfs to find the first island*/
-        while(!queueIsland.isEmpty()){
-            int parentNum = queueIsland.size();
-            for(int i = 0 ;i<parentNum; i++){
-                int[] position = queueIsland.poll();
-                if(position[0]-1 >=0 && A[position[0]-1][position[1]] == 1 && !mark[position[0]-1][position[1]]){
-                    queueIsland.offer(new int[]{position[0]-1, position[1]});
-                    mark[position[0]-1][position[1]] = true;
-                }
-                if(position[0]+1 < row && A[position[0]+1][position[1]] == 1  && !mark[position[0]+1][position[1]]){
-                    queueIsland.offer(new int[]{position[0]+1, position[1]});
-                    mark[position[0]+1][position[1]] = true;
-                }
-                if(position[1]-1 >=0  && A[position[0]][position[1]-1] == 1  && !mark[position[0]][position[1]-1]){
-                    queueIsland.offer(new int[]{position[0], position[1]-1});
-                    mark[position[0]][position[1]-1] = true;
-                }
-                if(position[1]+1 < col && A[position[0]][position[1]+1] == 1 && !mark[position[0]][position[1]+1] ){
-                    queueIsland.offer(new int[]{position[0], position[1]+1});
-                    mark[position[0]][position[1]+1] = true;
-                }
-                /* 如果该位置是边缘点（可以延伸）的话，加入到集合中，后续不断扩散 */
-                if( !((position[0]-1 <0  || (position[0] -1 >=0 && A[position[0]-1][position[1]] == 1) ) &&
-                        (position[0] + 1>= row || (position[0]+1 < row && A[position[0]+1][position[1]] == 1) ) &&
-                        (position[1] - 1<0  || (position[1]-1 >=0 && A[position[0]][position[1]-1] == 1) ) &&
-                        (position[1] + 1>= col || (position[1]+1 < col && A[position[0]][position[1]+1] == 1) ) )
-
-                ){
-                    queueEdge.offer(position);
+    /**
+     * 找到第一个岛屿的起始位置
+     * @param area
+     * @return
+     */
+    public static int[] getOneIslandStartPos(int[][] area){
+        for(int i = 0 ; i< area.length; i++){
+            for(int j =0 ; j< area[0].length; j++){
+                if(area[i][j] == 1){
+                    return new int[]{i, j};
                 }
             }
         }
+        return null;
+    }
 
-        /* 扩散，第一次接触的为最小桥梁的长度 */
+    /**
+     * bfS遍历小岛1， 并找到边缘位置
+     * @param area
+     * @param pos
+     * @param visited
+     * @return
+     */
+    public static Queue<int[]> getIslandOneEdge(int[][] area, int[] pos,  boolean[][] visited){
+        Queue<int[]> island = new LinkedList<>();
+        Queue<int[]> edges = new LinkedList<>();
+        island.offer(pos);
+        while(!island.isEmpty()){
+            int size = island.size();
+            for(int i = 0 ; i< size; i++){
+                int[] curPos = island.poll();
+                if(curPos[0] - 1 >= 0 && !visited[curPos[0] - 1][curPos[1]] && area[curPos[0] - 1][curPos[1]] == 1){
+                    island.offer(new int[]{curPos[0]-1, curPos[1]});
+                    visited[curPos[0] - 1][curPos[1]] = true;
+                }
+                if(curPos[0] + 1 <area.length  && !visited[curPos[0] + 1][curPos[1]] && area[curPos[0] + 1][curPos[1]] == 1){
+                    island.offer(new int[]{curPos[0]+1, curPos[1]});
+                    visited[curPos[0] + 1][curPos[1]] = true;
+                }
+                if(curPos[1] - 1 >= 0 && !visited[curPos[0]][curPos[1] - 1] && area[curPos[0]][curPos[1] - 1] == 1){
+                    island.offer(new int[]{curPos[0], curPos[1] - 1});
+                    visited[curPos[0]][curPos[1] - 1] = true;
+                }
+                if(curPos[1] + 1 <area[0].length && !visited[curPos[0]][curPos[1] + 1] && area[curPos[0]][curPos[1] + 1] == 1){
+                    island.offer(new int[]{curPos[0], curPos[1] + 1});
+                    visited[curPos[0]][curPos[1] + 1] = true;
+
+                }
+                //判断是否是边缘：集周围有0的位置
+
+                if((curPos[0] - 1 >= 0 && area[curPos[0] -1][curPos[1]] == 0) ||
+                        (curPos[0] + 1 <area.length && area[curPos[0] + 1][curPos[1]] == 0) ||
+                        (curPos[1] - 1 >= 0 && area[curPos[0]][curPos[1] - 1] == 0) ||
+                        (curPos[1] + 1 <area[0].length && area[curPos[0]][curPos[1] + 1] == 0) ){
+                    edges.offer(curPos);
+                }
+            }
+        }
+        return edges;
+    }
+
+    /**
+     * bfs 延申直到找到第一个1
+     * @param area
+     * @param edges
+     * @param visited
+     * @return
+     */
+    public static int spreadIslandOne(int[][] area, Queue<int[]> edges,  boolean[][] visited){
         int distance = 0;
-        while(!queueEdge.isEmpty()){
-            int numParent = queueEdge.size();
-            for(int i = 0 ;i< numParent; i++){
-                int[] position = queueEdge.poll();
-                if(position[0]-1 >=0 ){
-                    if(!mark[position[0]-1][position[1]]){
-                        if(A[position[0]-1][position[1]] == 1)
-                            return distance;
-                        else{
-                            queueEdge.offer(new int[]{position[0]-1, position[1]});
-                            mark[position[0]-1][position[1]] = true;
-                        }
+        while(!edges.isEmpty()){
+            int size = edges.size();
+            for(int i = 0; i<size; i++){
+                int[] p = edges.poll();
+                if(p[0] - 1 >= 0 && !visited[p[0] - 1][p[1]]){
+                    if(area[p[0] - 1][p[1]] == 1){
+                        return distance;
+                    } else {
+                        visited[p[0] - 1][p[1]] = true;
+                        edges.offer(new int[]{p[0] - 1, p[1]});
                     }
                 }
-                if(position[0]+1 < row ){
-                    if(!mark[position[0]+1][position[1]]){
-                        if(A[position[0]+1][position[1]] == 1)
-                            return distance;
-                        else{
-                            queueEdge.offer(new int[]{position[0]+1, position[1]});
-                            mark[position[0]+1][position[1]] = true;
-                        }
+                if(p[0] + 1 < area.length  && !visited[p[0] + 1][p[1]]){
+                    if(area[p[0] + 1][p[1]] == 1){
+                        return distance;
+                    } else {
+                        visited[p[0] + 1][p[1]] = true;
+                        edges.offer(new int[]{p[0] + 1, p[1]});
                     }
                 }
-                if(position[1]-1 >= 0  ){
-                    if(!mark[position[0]][position[1]-1]){
-                        if(A[position[0]][position[1]-1] == 1)
-                            return distance;
-                        else{
-                            queueEdge.offer(new int[]{position[0], position[1]-1});
-                            mark[position[0]][position[1]-1] = true;
-                        }
+                if(p[1] - 1 >= 0 && !visited[p[0]][p[1] - 1]){
+                    if(area[p[0]][p[1] - 1] == 1){
+                        return distance;
+                    } else {
+                        visited[p[0]][p[1] - 1] = true;
+                        edges.offer(new int[]{p[0], p[1] - 1});
                     }
                 }
-                if(position[1]+1 < col ){
-                    if(!mark[position[0]][position[1]+1]){
-                        if(A[position[0]][position[1]+1] == 1)
-                            return distance;
-                        else{
-                            queueEdge.offer(new int[]{position[0], position[1]+1});
-                            mark[position[0]][position[1]+1] = true;
-                        }
+                if(p[1] + 1 < area[0].length && !visited[p[0]][p[1] + 1]){
+                    if(area[p[0]][p[1] + 1] == 1){
+                        return distance;
+                    } else {
+                        visited[p[0]][p[1] + 1] = true;
+                        edges.offer(new int[]{p[0], p[1] + 1});
                     }
                 }
             }
             distance++;
-
         }
         return distance;
     }
+
 }

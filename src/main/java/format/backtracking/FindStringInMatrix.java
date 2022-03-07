@@ -6,7 +6,7 @@ public class FindStringInMatrix {
     /**
      * 回溯： 效率较低
      */
-    public boolean exist(char[][] board, String word) {
+    public static boolean exist(char[][] board, String word) {
         char[] letters = word.toCharArray();
         for(int i = 0 ; i< board.length; i++){
             for(int j = 0; j< board[0].length; j++){
@@ -20,11 +20,14 @@ public class FindStringInMatrix {
         return false;
     }
 
-    public boolean dfs(char[][] board, int row, int col,char[] letters,  int k){
+    public static boolean dfs(char[][] board, int row, int col,char[] letters,  int k){
+
         if( k == letters.length-1){
             return true;
         }
-        board[row][col] = '*'; // 为避免之后的重复使用相同元素
+
+        // 为避免之后的重复使用相同元素
+        board[row][col] = '*';
         k++;
         boolean result = false;
         if(row - 1>= 0 && board[row-1][col]!='*' && board[row-1][col] == letters[k]){
@@ -36,7 +39,7 @@ public class FindStringInMatrix {
         if(!result && col - 1>= 0 && board[row][col-1]!='*' && board[row][col-1] == letters[k]){
             result = dfs(board, row, col-1, letters, k);
         }
-        if(!result && row + 1< board[0].length && board[row][col+1]!='*' && board[row][col+1] == letters[k]){
+        if(!result && col + 1< board[0].length && board[row][col+1]!='*' && board[row][col+1] == letters[k]){
             result = dfs(board, row, col+1, letters, k);
         }
         board[row][col] = letters[k-1]; //恢复
@@ -44,7 +47,7 @@ public class FindStringInMatrix {
     }
 
     /**
-     * 代码的优化：
+     * 代码的优化：不修改原数组使用辅助空间判断
      */
     public boolean exist2(char[][] board, String word) {
         boolean[][] isUsed = new boolean[board.length][board[0].length];
@@ -61,6 +64,7 @@ public class FindStringInMatrix {
         }
         return false;
     }
+
     public static boolean dfs(char[][] board, String word,boolean[][] isUsed,int i,int j,int depth){
         if(depth == word.length()){
             return true;

@@ -21,6 +21,7 @@ public class NextRange {
      * （2）该位置使用右边大于其值得最小值替代
      * （3）其他位置按从小到大排列即可
      * （4）如果数组是逆序的，直接返回从小到达的顺序即可
+     *
      */
     public void nextPermutation(int[] nums) {
         if(nums.length <=1)

@@ -14,33 +14,36 @@ public class AllRangeString {
      * @param str
      * @return
      */
-    public ArrayList<String> Permutation(String str) {
+    public static ArrayList<String> Permutation(String str) {
         ArrayList<String> res = new ArrayList<>();
         char[] letters = str.toCharArray();
+        // 先排序可以简化剪枝操作，
         Arrays.sort(letters);
-        dfs(letters, 0, res);
+        StringBuilder perm = new StringBuilder();
+        boolean[] visited = new boolean[str.length()];
+        dfs(letters, 0, visited, perm, res);
         Collections.sort(res);
         return res;
     }
 
-    public void dfs(char[] letters, int k, ArrayList<String> res ){
-        if( k == letters.length-1){
-            res.add(new String(letters));
+    public static void dfs(char[] letters, int k, boolean[] visited, StringBuilder perm, ArrayList<String> res ){
+        if( k == letters.length){
+            res.add(perm.toString());
         }
         else{
-            for( int i = k; k< letters.length; k++ ){
-                if(letters[i] == letters[k] && i !=k){    // 重复的就不交换
+            for( int i = 0; i< letters.length; i++ ){
+                //（1）已经访问过
+                //（2）如果是重复的数字，只有自己是第一个没有访问过的才会选择，之所以需要考虑之前的是否访问过， 是因为当交换的不是重复数字时候。
+                if(visited[i] || (i > 0 && letters[i] == letters[i-1] && !visited[i-1])) {
                     continue;
                 }
-                char tmp = letters[k];
-                letters[k] = letters[i];
-                letters[i] = tmp;
+                perm.append(letters[i]);
+                visited[i] = true;
 
-                dfs(letters , k+1, res);
+                dfs(letters, k+1, visited, perm, res);
 
-                tmp = letters[k];
-                letters[k] = letters[i];
-                letters[i] = tmp;
+                visited[i] = false;
+                perm.deleteCharAt(perm.length()-1);
             }
         }
     }

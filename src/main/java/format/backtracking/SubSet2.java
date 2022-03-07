@@ -14,7 +14,7 @@ public class SubSet2 {
      * 迭代算法：res 保存结果， lastIncrement 保存上次增加的， 对于重复的元素只增加增量，否则就重复了，
      * 这里先排序，就可以直接利用增量来实现一次遍历，时间复杂度为2^n
      */
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
+    public static  List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         res.add(new ArrayList<>());
         Arrays.sort(nums);
@@ -49,15 +49,15 @@ public class SubSet2 {
      * 如果此时temp为 1， 则可以加2 或 3 ，{}、{1}、{1, 2}、{1,3}
      * 但是对于下一个{1,2}，可以加2 或 3 保证不会漏掉，
      */
-    List<List<Integer>> result = new ArrayList<>();
-    public List<List<Integer>> subsetsWithDup2(int[] nums) {
+    static List<List<Integer>> result = new ArrayList<>();
+    public static List<List<Integer>> subsetsWithDup2(int[] nums) {
         List<Integer> temp = new ArrayList<>();
         Arrays.sort(nums);
         hs(nums, temp, 0);
         return result;
     }
 
-    public void hs(int[] nums, List<Integer> temp, int index){
+    public static void hs(int[] nums, List<Integer> temp, int index){
         result.add(new ArrayList<>(temp));
         for(int i = index; i < nums.length; i++){
             if(i > index && nums[i] == nums[i - 1]){  //仅仅是每一层不加重复的，之前加过不影响，不会漏掉
@@ -68,4 +68,5 @@ public class SubSet2 {
             temp.remove(temp.size() - 1);
         }
     }
+
 }

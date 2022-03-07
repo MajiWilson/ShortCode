@@ -76,6 +76,7 @@ public class NumsSquare {
             int size = queue.size();
             for( int i = 0 ; i <size ; i++ ){
                 int cur = queue.remove();
+                System.out.print(cur + " ");
                 for( int j = 1 ; j*j<=cur ; j++ ){
                     if( cur-j*j == 0 )return ans;
                     if( !visited[cur-j*j] ){
@@ -84,6 +85,7 @@ public class NumsSquare {
                     }
                 }
             }
+            System.out.println();
         }
         return ans;
     }

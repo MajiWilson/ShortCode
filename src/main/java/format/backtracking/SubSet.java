@@ -47,6 +47,7 @@ public class SubSet {
         return res;
     }
 
+
     /**
      * 方法2： 回溯，每一个num 都有两种选择，时间复杂度依然是2^n
      */
@@ -67,6 +68,28 @@ public class SubSet {
         temp.add(nums[index]);
         dfs(nums, index + 1, temp); //取
         temp.remove(temp.size() - 1);
+    }
+
+
+    /**
+     * 注意这两中回溯的不同区别，一种是每次两个选择，一种是每次都会选一
+     * @param array
+     * @return
+     */
+    public static List<List<Integer>> getSubSet(int[] array){
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        backTracking(array, 0, temp, res);
+        return res;
+    }
+
+    public static void backTracking(int[] array, int index, List<Integer> temp, List<List<Integer>> res){
+        res.add(new ArrayList<>(temp));
+        for(int i = index; i< array.length; i++){
+            temp.add(array[i]);
+            backTracking(array, i+1, temp, res);
+            temp.remove(temp.size() -1);
+        }
     }
 
 }

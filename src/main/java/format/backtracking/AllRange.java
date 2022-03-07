@@ -1,5 +1,7 @@
 package format.backtracking;
 
+import com.sun.xml.internal.bind.v2.model.util.ArrayInfoUtil;
+
 import java.util.*;
 
 /**
@@ -8,33 +10,38 @@ import java.util.*;
  */
 public class AllRange {
 
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        getAllRange(nums, 0, res);
+    public static List<int[]> permute(int[] num){
+        List<int[]> res = new ArrayList<>();
+        backtracking(num, 0, res);
         return res;
     }
 
-    /**
-     * 回溯法
-     */
-    public void getAllRange(int[] nums, int cur, List<List<Integer>> res){
-        if(cur == nums.length -1){ //递归出口
-            List<Integer> combination = new ArrayList<>();
-            for(int x : nums)
-                combination.add(x);
-            res.add(combination);
+    public static void backtracking(int[] num, int index, List<int[]> res){
+        // 递归出口：不需要创建cur列表，因为数组是现成的
+        if(index == num.length-1){
+            int[] cur = new int[num.length];
+            for(int i =0; i< cur.length; i++){
+                cur[i] = num[i];
+            }
+            res.add(cur);
+            return;
         }
-        for(int i = cur; i < nums.length; i++){ //交换后需要交换回来
-            int tmp = nums[cur];
-            nums[cur] = nums[i];
-            nums[i] = tmp;
+        for(int i = index; i < num.length; i++){
+            int temp = num[i];
+            num[i] = num[index];
+            num[index] = temp;
 
-            getAllRange(nums, cur + 1, res);
+            backtracking(num, index + 1, res);
 
-            nums[i] = nums[cur];
-            nums[cur] = tmp;
+            temp = num[i];
+            num[i] = num[index];
+            num[index] = temp;
         }
     }
+
+
+
+
 
 
 

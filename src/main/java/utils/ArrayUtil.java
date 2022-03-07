@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 /**
  * @author weitong
  * @date 2022/02-13 11:51 上午
@@ -54,6 +56,20 @@ public class ArrayUtil {
         }
         System.out.println();
     }
+    /**
+     * 打印数组
+     * @param array
+     */
+    public static void printArray(List<Integer> array){
+        for(int i =0; i<array.size();i++) {
+            System.out.printf("%3d",array.get(i));
+            if(i%50 ==49) {
+                System.out.println();
+            }
+        }
+        System.out.println();
+    }
+
 
 
 }

@@ -27,12 +27,14 @@ public class LetterPermutation {
             res.add(sb.toString());
             return;
         }
+        //不转换
         sb.append(letters[i]);
         dfs(letters, i+1, sb, res);
         sb.deleteCharAt(sb.length()-1);
         if(letters[i] >= '0' && letters[i] <= '9'){
             return;
         }
+        // 转换
         if(letters[i] >= 'a' && letters[i] <= 'z'){
             sb.append((char)(letters[i] - 32));
         }

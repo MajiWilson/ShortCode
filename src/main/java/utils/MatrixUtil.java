@@ -8,7 +8,7 @@ public class MatrixUtil {
         }
         int row = matrix.length;
         for(int i = 0 ;i < row; i++){
-            ArrayUtil.printArray(matrix[0]);
+            ArrayUtil.printArray(matrix[i]);
         }
     }
 
