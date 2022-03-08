@@ -20,31 +20,36 @@ public class SubjectTable {
 
 
     /**
-     * 方法1： dfs, 借助队列， 存储的入度为0的节点， 存储使用邻接表
+     * 方法1： BFS, 借助队列， 存储的入度为0的节点， 存储使用邻接表
      */
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int[] inDegree = new int[numCourses]; // 入度
+    public static boolean canFinish(int numCourses, int[][] preconditions){
+        int[] inDegree = new int[numCourses];
         List<List<Integer>> adjList = new ArrayList<>();
-        for(int i = 0 ; i< numCourses; i++){  // 存储边
-            adjList.add(new LinkedList<>());
+        // 每一个课程都有一个列表
+        for(int i = 0 ; i < numCourses; i++){
+            adjList.add(new ArrayList<>());
         }
-        for(int i = 0 ; i< prerequisites.length; i++){
-            inDegree[prerequisites[i][0]]++;
-            adjList.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        // 计算入度 和 存储图
+        for(int[] precondition : preconditions){
+            inDegree[precondition[1]]++;
+            adjList.get(precondition[0]).add(precondition[1]);
         }
-        Queue<Integer> roots = new LinkedList<>();
-        for(int i = 0; i< numCourses; i++){ // 只需要对入度为0的进行遍历判断即可， 也就是root
+
+        // 找到所以入度为0 的起始点
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i = 0 ; i< numCourses; i++){
             if(inDegree[i] == 0){
-                roots.offer(i);
+                queue.offer(i);
             }
         }
-        while(!roots.isEmpty()){
-            int cur = roots.poll();
+        // 对每一个root其孩子都入度减一
+        while(!queue.isEmpty()){
+            int cur = queue.poll();
             numCourses--;
             for(int child : adjList.get(cur)){
-                inDegree[child] --;
-                if(inDegree[child] == 0){ //如果入度为0 ，还需要加入队列中，
-                    roots.offer(child);
+                inDegree[child]--;
+                if(inDegree[child] == 0){
+                    queue.offer(child);
                 }
             }
         }
@@ -52,43 +57,48 @@ public class SubjectTable {
     }
 
     /**
-     * 使用邻接表来存储图，具体数据结构为list<list>， 思路是使用dfs,
+     * 方法2： DFS, 递归写法， 不需要从入度为0的点出发， 存储使用邻接表
      */
-    List<List<Integer>> edges;
-    int[] visited;
-    boolean res = true;
-
-    public boolean canFinish1(int numCourses, int[][] prerequisites) {
-        edges = new ArrayList<List<Integer>>();
-        for (int i = 0; i < numCourses; ++i) {
-            edges.add(new ArrayList<Integer>());
+    public static boolean canFinish2(int numCourses, int[][] preconditions){
+        List<List<Integer>> adjList = new ArrayList<>();
+        for(int i = 0 ; i < numCourses; i++){
+            adjList.add(new ArrayList<>());
         }
-        visited = new int[numCourses];
-        for (int[] info : prerequisites) {
-            edges.get(info[1]).add(info[0]);
+        // 存储图
+        for(int[] precondition : preconditions){
+            adjList.get(precondition[0]).add(precondition[1]);
         }
-        for (int i = 0; i < numCourses && res; ++i) {
-            if (visited[i] == 0){
-                dfs(i);
+        int[] status = new int[numCourses];
+        for(int i = 0 ; i< numCourses; i++){
+            if(status[i] == 0){
+                if(!dfs(i, adjList, status)){
+                    return false;
+                }
             }
         }
-        return res;
+        return true;
     }
 
-    public void dfs(int u) {
-        visited[u] = 1;
-        for (int next: edges.get(u)) {
-            if (visited[next] == 0) { //该点在全部遍历完毕前不能再次遇到，否则该图存在环
-                dfs(next);
-                if (!res) {
-                    return;
-                }
-            } else if(visited[next] == 1){ //再次遇到，说明有环
-                res = false;
-                return;
-            }// visited[next] == 2 的不用管，
+    /**
+     * dfs : status 维持三种访问状态 0 表示未访问， 1表示正在深度遍历中， 2表示应便利完成了
+     * @param k
+     * @param adjList
+     * @param status
+     * @return
+     */
+    public static boolean dfs(int k, List<List<Integer>> adjList, int[] status){
+        status[k] = 1;
+        for(int child : adjList.get(k)){
+            if(status[k] == 0){
+                 if(!dfs(child, adjList, status)){
+                     return false;
+                 }
+            } else if(status[child] == 1){
+                return false;
+            }
         }
-        visited[u] = 2; // 遍历完
+        status[k] = 2;
+        return true;
     }
 
     public boolean canFinish3(int numCourses, int[][] prerequisites) {
