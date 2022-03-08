@@ -6,20 +6,26 @@ package format.dp;
  */
 public class MaxContinueSum {
 
-    public int maxSubArray(int[] nums) {
+    /**
+     * 一直累加即可：当出现小于零的时候直接放弃重新开始
+     * 可以证明这就是最优解：如果sum < 0 sum + cur < cur, 每一次都是最优解
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray(int[] nums) {
         int max = Integer.MIN_VALUE;
         int sum = 0;
-        for(int i= 0; i< nums.length ;i++){
-            if(sum >= 0){
-                sum += nums[i];
-            }
-            else{
-                sum = nums[i];
+        for (int num : nums) {
+            if (sum >= 0) {
+                sum += num;
+            } else {
+                sum = num;
             }
             max = Math.max(max, sum);
         }
         return max;
     }
+
 
 
 }
