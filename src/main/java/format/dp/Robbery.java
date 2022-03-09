@@ -12,7 +12,7 @@ public class Robbery {
      * 动态规划：dp[i] 表示在0-i内的最大收获，dp[i] = max{ dp[i-2] + num[i], dp[i-1]}
      * 注意：这里其实也可以不用数组，而只需要两个变量来交替存储即可，空间  O（1）
      */
-    public int rob(int[] nums) {
+    public static int rob(int[] nums) {
         if(nums.length == 1){
             return nums[0];
         }
@@ -23,5 +23,25 @@ public class Robbery {
             dp[i] = Math.max(dp[i-2] + nums[i], dp[i-1]);
         }
         return dp[nums.length-1];
+    }
+
+    /**
+     * 使用两个变量即可
+     * @param nums
+     * @return
+     */
+    public static int rob2(int[] nums){
+        if(nums.length == 1){
+            return nums[0];
+        }
+        int lastLastSum = nums[0];
+        int lastSum = nums[1];
+        int max = Math.max(lastLastSum, lastLastSum);
+        for(int i = 2; i<nums.length; i++){
+            max = Math.max(lastLastSum + nums[i], lastSum);
+            lastLastSum = lastSum;
+            lastSum = max;
+        }
+        return max;
     }
 }

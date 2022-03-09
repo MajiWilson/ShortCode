@@ -50,5 +50,13 @@ public class DpTest {
         System.out.println(MaxContinueSum.maxSubArray(array));
     }
 
+    @Test
+    public void robTest1(){
+        int[] nums = {3,4,1,5,7,3,5,7,2,3};
+        System.out.println(Robbery.rob(nums));
+        System.out.println(Robbery.rob2(nums));
+    }
+
+
 
 }
