@@ -44,4 +44,21 @@ public class Robbery {
         }
         return max;
     }
+
+    /**
+     * 可以进一步简化
+     */
+    public static int rob3(int[] nums){
+        int pre = 0;
+        int cur = 0;
+        int temp;
+        for(int num : nums){
+            temp = cur;
+            cur = Math.max(pre + num, cur);
+            pre = temp;
+        }
+        return cur;
+    }
+
+
 }

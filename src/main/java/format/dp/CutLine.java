@@ -8,19 +8,20 @@ package format.dp;
 public class CutLine {
 
     /**
+     * dp[I] 表示长度为i的线段的最优解
      * 动态规划： 对于每个长度i来讲，内循环中需要考虑j*(i-j)是因为， 按题意至少建成两端，前面的j可以不减，也可以剪，对应的乘积是不同的
      * 时间为O（n2）;
      */
-    public int cuttingRope(int n) {
-        int[] dp = new int[n+1];
-        dp[0] = 1;
-        dp[1] = 1;
-        for(int i = 2; i<= n; i++){
-            for(int j = i-1; j>0; j--){
-               dp[i] = Math.max(dp[i], Math.max(j * (i-j), dp[j]*(i-j) ));
-            }
-        }
-        return dp[n];
+    public static int cuttingRope(int n) {
+       int[] dp = new int[n+1];
+       dp[0] = 1;
+       dp[1] = 1;
+       for(int i = 2; i<=n; i++){
+           for(int j = i-1; j >0 ;j--){
+               dp[i] = Math.max(dp[i], Math.max(dp[j] * (i-j), j *(i-j)));
+           }
+       }
+       return dp[n];
 
     }
 

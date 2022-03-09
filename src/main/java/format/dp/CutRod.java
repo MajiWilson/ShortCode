@@ -22,8 +22,13 @@ public class CutRod {
 
         int n =24;
         Arrays.fill(r, -1);
-        int best = cutRod(n);
-        System.out.println(n+": "+best);
+        int best1 = cutRod(n);
+        System.out.println(n+": "+best1);
+        int best2 = cutRod2(n);
+        System.out.println(n+": "+best2);
+        int best3 = cutRod3(n);
+        System.out.println(n+": "+best3);
+
     }
     /**
      * 暴力求解，递归， 重复的子问题没有优化 时间效率较差

@@ -55,6 +55,32 @@ public class DpTest {
         int[] nums = {3,4,1,5,7,3,5,7,2,3};
         System.out.println(Robbery.rob(nums));
         System.out.println(Robbery.rob2(nums));
+        System.out.println(Robbery.rob3(nums));
+
+    }
+
+    @Test
+    public void cutLineMaxMultiTest(){
+        System.out.println(CutLine.cuttingRope(10));
+    }
+
+    @Test
+    public void minCostClimbStairs(){
+        int[] cost = {3,2,1,5,2,4,6,3,1,4};
+        ArrayUtil.printArray(cost);
+        System.out.println(ClimbStairs2.getMinCost(cost));
+        System.out.println(ClimbStairs2.getMinCost2(cost));
+        System.out.println(ClimbStairs2.minCostClimbingStairs(cost));
+
+
+    }
+
+    @Test
+    public void coverAreaTest(){
+        System.out.println(CoverArea.getSolutions(12));
+        System.out.println(CoverArea.getSolutions2(12));
+        System.out.println(CoverArea.rectCover(12));
+        System.out.println(CoverArea.rectCover2(12));
     }
 
 
