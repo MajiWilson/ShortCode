@@ -29,21 +29,22 @@ public class ChangeMoney {
     }
 
     /**
-     * 动态规划
+     * 动态规划 dp[i] 表示金额 I 需要使用的最小货币数
      */
-    public int coinChange2(int[] coins, int amount) {
-        int max = amount + 1;
-        int[] dp = new int[amount + 1];
-        Arrays.fill(dp, max);
-        dp[0] = 0;
-        for (int i = 1; i <= amount; i++) {
-            for (int j = 0; j < coins.length; j++) {
-                if (i >= coins[j]) {
-                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1); // 更新
+
+    public static int getMinChanges(int[] coins, int amount){
+        int[] record = new int[amount + 1];
+        Arrays.fill(record, Integer.MAX_VALUE);
+        record[0] = 0;
+        for(int i = 1; i<= amount; i++ ){
+            for(int coin : coins){
+                if( i - coin >= 0){
+                    record[i] = Math.min(record[i], record[i - coin] + 1);
                 }
+                //如果不足说明没法用这种币种来支付，所以不更新
             }
         }
-        return dp[amount] > amount ? -1 : dp[amount];
+        return record[amount] <= amount? record[amount]: -1;
     }
 
 }

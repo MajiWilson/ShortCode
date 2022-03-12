@@ -9,32 +9,36 @@ public class ChangeMoney2 {
 
     /**
      * 方法1： 动态规划： dp[i][j]表示使用i种面额组合金额j的方案数
+
+
+
+    /***
+     * 使用 i 种货币， 支付 j 元， 解为：使用 i-1 种货币（没用到第i种货币）支付 j 元的方法 + 使用 i 种货币（必须使用到第i货币）支付 j 元的情况，
+     * 这样就不会重复
+     * 怎样保证使用了呢，当金额小于币种面值，无法使用 = 0
+     * 当金额刚好等于币种： = 1
+     * 当大于  = （j-币种金额） 的情况，至少使用一次，所以满足
+     * 小结： 不使用  + 至少使用一次的
+     *
+     * @param coins
+     * @param amount
+     * @return
      */
-    public int change(int amount, int[] coins) {
-        if(amount == 0 || coins == null)
-            return 1;
-        int n = coins.length;
-        int[][] dp = new int[n+1][amount+1];
-        for(int i = 0; i<= n; i++){   //这两个初始化是没有必要的实际上
-            dp[i][0] = 0;
-        }
-        for(int i = 0; i<= amount; i++){
-            dp[0][i] = 0;
-        }
-        for(int i = 1; i<= n; i++){
+    public static int getSolutions(int[] coins, int amount){
+        // 注意这里币种不需要由小到大， 无序也是正确的！！
+        int[][] record = new int[coins.length + 1][amount + 1];
+        for(int i = 1; i <= coins.length; i++){
             for(int j = 1; j<= amount; j++){
-                if(j < coins[i]){
-                    dp[i][j] = dp[i-1][j];
-                }
-                else if(j == coins[i]){
-                    dp[i][j] = dp[i-1][j] + 1;
-                }
-                else{
-                    dp[i][j] = dp[i-1][j] + dp[i][j-coins[i]];
+                if(j < coins[i-1]){
+                    record[i][j] = record[i-1][j];
+                } else if( j == coins[i-1]){
+                    record[i][j] = record[i-1][j] + 1;
+                } else{
+                    record[i][j] = record[i-1][j] + record[i][j - coins[i-1]];
                 }
             }
         }
-        return dp[n][amount];
+        return record[coins.length][amount];
     }
 
 
