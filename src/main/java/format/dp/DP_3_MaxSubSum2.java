@@ -35,7 +35,7 @@ public class DP_3_MaxSubSum2 {
     public static int maxMidSubSum(int[] array, int left, int mid, int right) {
         int leftSum =0;
         int temp1 = Integer.MIN_VALUE;
-        for(int i = mid ;i>=left;i--) {//左边计算最大和，连续的，加到最大为止；
+        for(int i = mid ;i>=left;i--) {
             leftSum += array[i];
             if(leftSum > temp1 ) {
                 temp1 = leftSum;
