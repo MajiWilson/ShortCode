@@ -4,11 +4,11 @@ package java_language.thread;
  * Class:
  * Created by Master SkyWalker
  * May the force be with you !
- * 2020/3/1 , 19:24
+ * 2020/3/1 , 19:38
  */
-public class ThreadDemo4 {
-    /* 同步方法 */
-    public synchronized void methodA() {
+public class ThreadDemo_Class_Monitor {
+    /* 类锁 */
+    public synchronized static void methodA() {
         try {
             for (int i = 0; i < 5; i++) {
                 System.out.println("methodA-" + i);
@@ -18,9 +18,9 @@ public class ThreadDemo4 {
             e.printStackTrace();
         }
     }
-    /* 同步代码块  this */
+   /* 类锁*/
     public void methodB() {
-        synchronized (this) {
+        synchronized (ThreadDemo_Class_Monitor.class) {
             try {
                 for (int i = 0; i < 5; i++) {
                     System.out.println("methodB-" + i);
@@ -31,27 +31,13 @@ public class ThreadDemo4 {
             }
         }
     }
-    /* 同步代码块 对象 this锁不是同一个，可以并发执行*/
-    public void methodC() {
-        Object obj = new Object();
-        synchronized (obj) {
-            try {
-                for (int i = 0; i < 5; i++) {
-                    System.out.println("methodC-" + i);
-                    Thread.sleep(1000);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public static void main(String[] args) {
-        ThreadDemo4 test3 = new ThreadDemo4();
+        ThreadDemo_Class_Monitor test4 = new ThreadDemo_Class_Monitor();
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                test3.methodA();
+                test4.methodA();
             }
         });
         thread1.start();
@@ -59,18 +45,9 @@ public class ThreadDemo4 {
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                test3.methodB();
+                test4.methodB();
             }
         });
         thread2.start();
-
-        Thread thread3 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                test3.methodC();
-            }
-        });
-        thread3.start();
-
     }
 }

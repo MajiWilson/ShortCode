@@ -6,7 +6,7 @@ package java_language.thread;
  * May the force be with you !
  * 2020/3/1 , 19:16
  */
-public class SynchronizedDemSimple {
+public class ThreadDemo_Reentry_synchronized {
 
     /**
      * 可重入锁
@@ -16,17 +16,26 @@ public class SynchronizedDemSimple {
             try {
                 for (int i = 0; i < 5; i++) {
                     System.out.println(Thread.currentThread().getName() + " " + i);
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
         }
+        try {
+            for (int i = 0; i < 5; i++) {
+                System.out.println(Thread.currentThread().getName() + " " + i);
+                Thread.sleep(100);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
-      SynchronizedDemSimple test = new SynchronizedDemSimple();
+      ThreadDemo_Reentry_synchronized test = new ThreadDemo_Reentry_synchronized();
       for( int i = 0 ; i< 10 ;i++){
           Thread thread = new Thread(new Runnable() {
               @Override

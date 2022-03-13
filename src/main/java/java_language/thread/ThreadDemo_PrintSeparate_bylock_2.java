@@ -4,14 +4,14 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ThreadPrint1003 {
+public class ThreadDemo_PrintSeparate_bylock_2 {
     int i =1;
     Lock lock = new ReentrantLock();
     Condition condition1 = lock.newCondition();
     Condition condition2 = lock.newCondition();
     boolean firstDone = false;
     public static void main(String[] args) {
-        ThreadPrint1003 t = new ThreadPrint1003();
+        ThreadDemo_PrintSeparate_bylock_2 t = new ThreadDemo_PrintSeparate_bylock_2();
         t.print();
     }
     void print(){
