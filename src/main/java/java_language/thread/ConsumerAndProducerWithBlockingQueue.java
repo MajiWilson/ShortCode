@@ -10,6 +10,7 @@ public class ConsumerAndProducerWithBlockingQueue {
 		ExecutorService executor  = Executors.newFixedThreadPool(2);
 		executor.execute(new ProducerTask());
 		executor.execute(new ConsumerTask());
+
 		executor.shutdown();
 	}
 	

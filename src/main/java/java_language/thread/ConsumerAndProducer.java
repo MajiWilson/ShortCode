@@ -5,6 +5,7 @@ import java.util.concurrent.locks.*;
 
 public class ConsumerAndProducer {
 	private static Buffer buffer =new Buffer();
+
 	public static void main(String[] args) {
 		ExecutorService executor  = Executors.newFixedThreadPool(2);
 		executor.execute(new ProducerTask());

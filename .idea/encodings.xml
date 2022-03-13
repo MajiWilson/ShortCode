@@ -44,6 +44,8 @@
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/AccountWithoutSync.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/ConsumerAndProducer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/ConsumerAndProducerWithBlockingQueue.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/ProducerAndConsumerDemo_Lock_Condition.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/ReEntrantlockDemo1.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/ThreadDemo_Join_Interrupt.java" charset="GBK" />
   </component>
 </project>
