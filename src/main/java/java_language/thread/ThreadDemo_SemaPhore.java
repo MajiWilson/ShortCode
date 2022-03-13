@@ -5,13 +5,13 @@ import java.util.concurrent.Semaphore;
 /**
  * 两个线程交替打印1-100
  */
-public class ThreadPrint100 {
+public class ThreadDemo_SemaPhore {
     int i =1;
     Semaphore s1 = new Semaphore(1);
     Semaphore s2 = new Semaphore(0);// 只可能交替执行。
 
     public static void main(String[] args) {
-        ThreadPrint100 t = new ThreadPrint100();
+        ThreadDemo_SemaPhore t = new ThreadDemo_SemaPhore();
         t.print();
     }
     void print(){

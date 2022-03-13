@@ -83,6 +83,14 @@ public class DpTest {
         System.out.println(CoverArea.rectCover2(12));
     }
 
+    @Test
+    public void changeMoneySolutionsTest(){
+        int[] coins = {10,5,3,1};
+        int amount = 10;
+        System.out.println(ChangeMoney2.getSolutions(coins, amount));
+
+    }
+
 
 
 }

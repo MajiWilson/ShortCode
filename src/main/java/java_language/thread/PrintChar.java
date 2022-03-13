@@ -14,13 +14,11 @@ public class PrintChar implements Runnable{
 	public void run() {
 		try {
 			for(int i =0;i<times;i++) {
-				
-				if(i%20==0) {
-					System.out.println();
-					Thread.sleep(1);
-				}
-				System.out.print(" "+ch);
+				System.out.print(ch + " ");
 			}
+			System.out.println();
+			System.out.println();
+			Thread.sleep(1000);
 		}
 		catch(InterruptedException ex) {
 			ex.printStackTrace();

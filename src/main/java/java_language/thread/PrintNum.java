@@ -9,14 +9,21 @@ public class PrintNum implements Runnable{
 	}
 	@Override
 	public void run() {
-		Thread thread2 = new Thread(new PrintChar('*',100));
-		thread2.start();
+
 		try {
 			for(int i=0;i<times;i++) {
-				System.out.print(" "+number);
-				if(i==50)
-					thread2.join();
+				System.out.print(number + " ");
+				if(i%50 == 0  && i != 0){
+					System.out.println();
+				}
+				if(i%200 == 0 && i != 0 ){
+					Thread thread = new Thread(new PrintChar('*',50));
+					thread.start();
+					thread.join();
+
+				}
 			}
+			System.out.println();
 		}
 		catch(InterruptedException ex) {
 			ex.printStackTrace();

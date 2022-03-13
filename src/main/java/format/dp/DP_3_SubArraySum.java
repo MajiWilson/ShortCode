@@ -17,7 +17,7 @@ public class DP_3_SubArraySum {
         System.out.println(solution2(array, 6));
     }
 
-    /* 暴力求解， 两层循环  */
+    /* 暴力求解， 两 g层循环  */
     public static int solution1(int[] array, int k){
         int n = array.length;
         int count = 0;
@@ -33,7 +33,10 @@ public class DP_3_SubArraySum {
         return count;
     }
 
-    /*动态规划: 最优解 ：记录 sum 为累加和 ， 则 如果之前的sum - k有多少个，那么这次就会有多少个新的， */
+    /*动态规划: 最优解 ：记录 sum 为累加和 ， 则 如果之前的sum - k有多少个，那么这次就会有多少个新的，
+    之所以这样是正确的，是因为sum是连续的，所以之前和为sum-K， 也是连续的， 两者之间就是和为k的情况。
+    这里使用map而不是用数组是因为不知道sum最终会加到多少且可能存在负数所以无法取搭配准确的大小
+    *  */
     public static int solution2(int[] array, int k){
         int n = array.length;
         int count = 0;
@@ -49,5 +52,6 @@ public class DP_3_SubArraySum {
         }
         return count;
     }
+
 
 }
