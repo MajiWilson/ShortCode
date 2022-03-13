@@ -13,7 +13,7 @@ public class OptionalDemo {
         Optional<String> optional1 = Optional.of("maji");
         System.out.println(optional1.get());
         Optional optional2 = Optional.empty();
-        //����System.out.println(optional2.get());
+
         System.out.println(optional2.orElseGet(()->" love alin forever "));
         System.out.println( optional2.orElse("love alin "));
         System.out.println( optional1.filter( (value)-> value.length()>=5));

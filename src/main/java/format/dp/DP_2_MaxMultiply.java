@@ -13,6 +13,14 @@ public class DP_2_MaxMultiply {
         System.out.println( maxMultiply( data ));
 
     }
+
+    /**
+     * 连续的乘机所以一次遍历即可
+     * 因为符号的问题需要保留最大和最小值
+     *
+     * @param data
+     * @return
+     */
     public static int maxMultiply(int[] data){
         if(data == null || data.length <=1){
             return 0;
