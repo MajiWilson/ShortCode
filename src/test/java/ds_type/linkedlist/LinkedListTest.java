@@ -131,6 +131,7 @@ public class LinkedListTest {
 
     }
 
+
     @Test
     public void swapNodeTest(){
         ListNode head = LinkedListUtil.generateLinkedList(12);

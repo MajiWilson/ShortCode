@@ -7,9 +7,11 @@ public class MatrixUtil {
             return;
         }
         int row = matrix.length;
+        System.out.println("************************");
         for(int i = 0 ;i < row; i++){
             ArrayUtil.printArray(matrix[i]);
         }
+        System.out.println("************************");
     }
 
 

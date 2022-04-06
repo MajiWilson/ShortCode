@@ -39,12 +39,13 @@ public class SynchronizedCollectionsDemo2 {
         countDownLatch.await();
         executorService.shutdown();
         for(int i = 0 ;i<100 ;i++){
-            System.out.print(list1.get(0) + " ");
+            System.out.print(list1.get(i) + " ");
         }
     }
     public static void update(int i ) throws InterruptedException {
 
         //list1.add(i);
         list1.add(i);
+        list2.add(i);
     }
 }
