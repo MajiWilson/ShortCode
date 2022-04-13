@@ -30,7 +30,9 @@ public class AllRangeAllowRepeat {
             return;
         }
         for (int i = 0; i < nums.length; ++i) {
-            // 剪枝的结果是：每次都会从连续的重复数字中选第一个，其余不会参与交换
+            /**
+             * 这里进行减枝，因为是在某一次批次上进行的，所以相同的元素，只会交换一次；且因为是按顺序的，所以上一个没有使用，自己也不去更新
+             */
             if (vis[i] || (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1])) {
                 continue;
             }

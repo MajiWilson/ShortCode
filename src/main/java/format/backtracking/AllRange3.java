@@ -23,6 +23,7 @@ public class AllRange3 {
             res.add(new ArrayList<>(perm));
             return;
         }
+        // 注意差别： 每次都是从0开始遍历所有的
         for(int i = 0 ; i< num.length; i++){
             if(visited[i]){
                 continue;
@@ -35,6 +36,7 @@ public class AllRange3 {
             perm.remove(perm.size()-1);
             visited[i] = false;
         }
+
     }
 
 
