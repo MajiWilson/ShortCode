@@ -11,6 +11,7 @@ public class DP_3_MinSubSum {
     public static void main(String[] args) {
         int[] array = {-7 , -12 , 20 , -10 , -16 , 2 , 16,  -24 , 11 , -19 ,  5,  23,  0 , -11,  14,  16 ,  -23 , 23  ,-24 , -22};
         System.out.println("minSubSum: "+ minSubSum(array));
+        System.out.println("minSubSum: "+ minSubSum2(array));
     }
     /* 注意 sum[n-1] 并不是最终的结果，最终的结果是 sum 中的最大值，时间复杂度为 O（n）  */
     public static int minSubSum(int[] array){
@@ -24,6 +25,27 @@ public class DP_3_MinSubSum {
             }
         }
 
+        return minSum;
+    }
+
+
+    /**
+     * 类似的。 一遇到前面的总和已经大于零就重新开始累加
+     * @param array
+     * @return
+     */
+
+    public static int minSubSum2(int[] array){
+        int sum = 0;
+        int minSum = sum;
+        for(int i = 0 ;i < array.length ;i++){
+            if(sum > 0){
+                sum = array[i];
+            } else{
+                sum += array[i];
+            }
+            minSum = minSum > sum ? sum : minSum;
+        }
         return minSum;
     }
 }

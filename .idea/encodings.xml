@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/ArrayCenter.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_2_ShopList.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_3_ArrayCenter.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_3_FindMod.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_3_ModifyToIncArray.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_3_NK.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_4_LatestCatFood.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/FindMod.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/JosephRing.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/MakeBoxDifferent.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/ModifyToIncArray.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/SeparateCandi3.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/ChangeMoneyDemo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/CutRod.java" charset="GBK" />

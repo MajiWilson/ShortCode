@@ -6,7 +6,7 @@ package java_language.thread;
  * May the force be with you !
  * 2020/3/1 , 19:41
  */
-public class ThreadDemo6 {
+public class ThreadDemo_Class_Object_Monitor {
 
     /*对象锁*/
     public synchronized  void methodA() {
@@ -32,7 +32,7 @@ public class ThreadDemo6 {
     }
 
     public static void main(String[] args) {
-        ThreadDemo6 test5 = new ThreadDemo6();
+        ThreadDemo_Class_Object_Monitor test5 = new ThreadDemo_Class_Object_Monitor();
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {

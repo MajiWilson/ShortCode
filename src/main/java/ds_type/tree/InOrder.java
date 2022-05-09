@@ -55,6 +55,33 @@ public class InOrder {
         return res;
     }
 
+    public static List<Integer> inOrderTest(TreeNode root){
+        List<Integer> res = new ArrayList<>();
+        if(root == null){
+            return res;
+        }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.push(root);
+        TreeNode cur = root;
+        while(!stack.isEmpty()){
+            while(cur != null){
+                if(cur.left != null){
+                    stack.push(cur.left);
+                } else{
+                    break;
+                }
+            }
+            TreeNode temp = stack.pop();
+            res.add(temp.val);
+            if(temp.right != null){
+                cur = temp.right;
+                stack.push(cur);
+            }
+        }
+        return res;
+
+    }
+
 
 
 }

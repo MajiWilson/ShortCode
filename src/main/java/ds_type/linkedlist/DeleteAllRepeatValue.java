@@ -22,23 +22,26 @@ public class DeleteAllRepeatValue {
         ListNode pre = newHead;
         ListNode start = head;
         ListNode cur = head.next;
-        while(cur != null ){
-            while( cur != null && cur.val == start.val){
+
+        while(cur != null){
+            while(cur != null && cur.val == start.val){
                 cur = cur.next;
             }
             if(cur == null){
                 pre.next = null;
-            } else if(start.next != cur ){
-                pre.next = cur;
+            } else if(start.next == cur){
+                pre = pre.next;
                 start = cur;
                 cur = cur.next;
-            } else {
-                pre = pre.next;
-                start = start.next;
-                cur = cur.next;
+            } else{
+                pre.next = cur;
+                start =cur;
+                cur= cur.next;
             }
         }
+
         return newHead.next;
     }
+
 
 }

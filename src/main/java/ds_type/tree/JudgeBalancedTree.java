@@ -33,16 +33,20 @@ public class JudgeBalancedTree {
     }
 
     public int dfs(TreeNode root){
-        if(root == null)
+        if(root == null){
             return 0;
-        int left = dfs(root.left);
-        if(left == -1)    // 及时剪枝
+        }
+        int leftHeight = dfs(root.left);
+        if(leftHeight == -1){
             return -1;
-        int right = dfs(root.right);
-        if(right == -1)
+        }
+        int rightHeight = dfs(root.right);
+        if(rightHeight == -1){
             return -1;
-        if(Math.abs(left -right) > 1)
+        }
+        if(Math.abs(leftHeight - rightHeight) > 1){
             return -1;
-        return Math.max(left, right) + 1;  // 返回树高
+        }
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 }

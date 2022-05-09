@@ -7,8 +7,8 @@ public class ScheduledThreadPoolDemo {
 
 	public static void main(String[] args) {
 		ScheduledThreadPoolExecutor e = new ScheduledThreadPoolExecutor(2);
-		e.scheduleAtFixedRate(new MyThread4(),0,10000,TimeUnit.MILLISECONDS);
-		e.scheduleAtFixedRate(new MyThread4(),0,10000,TimeUnit.MILLISECONDS);
+		e.scheduleAtFixedRate(new MyThread4(),0,1000,TimeUnit.MILLISECONDS);
+		e.scheduleAtFixedRate(new MyThread4(),0,1000,TimeUnit.MILLISECONDS);
 
 	}
 

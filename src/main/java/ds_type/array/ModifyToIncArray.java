@@ -8,7 +8,7 @@ package ds_type.array;
  * May the force be with you !
  * 2020/4/20 , 18:00
  */
-public class Array_3_ModifyToIncArray {
+public class ModifyToIncArray {
     public static void main(String[] args){
         int[] array = {2,3,3,2,4};
         System.out.println( modifyArray(array) );

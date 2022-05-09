@@ -1,11 +1,11 @@
 package java_language.thread;
 
-public class ThreadPrint1002 {
+public class ThreadDemo_PrintSeparate_2 {
     int i =1;
     boolean firstDone = false;  // 打印奇数的线程是否已经打印过了，这是同步的关键，借助了object 的的wait()方法和notify（）
     Object lock = new Object();
     public static void main(String[] args) {
-        ThreadPrint1002 t =new ThreadPrint1002();
+        ThreadDemo_PrintSeparate_2 t = new ThreadDemo_PrintSeparate_2();
         t.print();
     }
     void print() {
