@@ -1,8 +1,11 @@
 package format.backtracking;
 
+import format.twoPointer.StringSplit;
 import org.junit.jupiter.api.Test;
 import utils.ArrayUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BacktrackingTest {
@@ -34,6 +37,25 @@ public class BacktrackingTest {
         System.out.println(res.size());
         for(List<Integer> list : res){
             ArrayUtil.printArray(list);
+        }
+    }
+
+    @Test
+    public void testSampleCombination(){
+        List<List<String>> samples = new ArrayList<>();
+        List<String> sample1 = new ArrayList<String>(Arrays.asList("a", "b", "c"));
+        List<String> sample2 = new ArrayList<>(Arrays.asList("1", "2", "3"));
+        List<String> sample3 = new ArrayList<>(Arrays.asList("A", "B", "C"));
+        samples.add(sample1);
+        samples.add(sample2);
+        samples.add(sample3);
+
+        List<List<String>> res = SampleCombination.sampleCombination(samples);
+        for(List<String> list : res){
+            for (String s : list){
+                System.out.print( s + " ");
+            }
+            System.out.println();
         }
     }
 }

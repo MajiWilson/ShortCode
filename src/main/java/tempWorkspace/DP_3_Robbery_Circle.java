@@ -1,6 +1,6 @@
 package tempWorkspace;
 
-import com.sun.javafx.robot.FXRobotImage;
+
 
 /**
  * Class: �̵��������ģ�

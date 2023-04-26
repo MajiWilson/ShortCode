@@ -2,10 +2,10 @@ package ds_type.linkedlist;
 
 import entity.ListNode;
 import org.junit.jupiter.api.Test;
-import sun.awt.image.ImageWatched;
+
 import utils.LinkedListUtil;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**

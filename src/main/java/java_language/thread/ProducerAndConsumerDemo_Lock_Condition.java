@@ -1,9 +1,6 @@
 package java_language.thread;//缓冲区为1，消费者和生产者问题，实现同步
 
-import entity.Tree;
-import sun.rmi.transport.proxy.CGIHandler;
 
-import javax.xml.stream.events.Characters;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
