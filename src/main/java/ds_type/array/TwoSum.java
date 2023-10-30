@@ -53,6 +53,48 @@ public class TwoSum {
         }
         return result;
     }
+
+    public static int[] twoSumTest(int[] nums, int target) {
+        // 先排序
+        int[] data = Arrays.copyOfRange(nums, 0 ,nums.length);
+        Arrays.sort(data);
+
+        // 双指针
+        int left = Integer.MIN_VALUE, right = Integer.MAX_VALUE;
+        for (int i = 0, j = data.length -1; i < j; ) {
+            int tempSum = data[i] + data[j];
+            if (tempSum == target) {
+                left = data[i];
+                right = data[j];
+                break;
+            }
+            if (tempSum < target ){
+                i++;
+            }
+            else {
+                j--;
+            }
+        }
+
+        if (left == Integer.MIN_VALUE) {
+            return new int[0];
+        }
+        // 找到下标
+        boolean leftVisited = false;
+        int[] res = new int[2];
+
+        for (int i = 0 ; i< nums.length; i++) {
+            if (nums[i] == left && !leftVisited) {
+                res[0] = i;
+                leftVisited = true;
+                continue;
+            }else if(nums[i] == right) {
+                res[1] = i;
+            }
+        }
+        return res;
+    }
+
     /* 哈希方式 */
     public static int[] twoSum2(int[] nums, int target) {
         int max = 2047;
@@ -68,17 +110,20 @@ public class TwoSum {
         }
         return null;
     }
+
+
     /* map方式 ，时间效率高，但是空间占用较大*/
     public static int[] twoSum3(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i< nums.length; i++) {
             int complement = target - nums[i];
             if (map.containsKey(complement)) {
-                return new int[] { map.get(complement), i };
+                return new int[]{map.get(complement), i};
             }
-            else{
+            else {
                 map.put(nums[i], i);
             }
+
         }
         throw new IllegalArgumentException("No two sum solution");
     }

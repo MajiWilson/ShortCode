@@ -5,6 +5,7 @@ import entity.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.concurrent.DelayQueue;
 
 /**
  * desc: 给定一棵二叉搜索树，请找出其中第k大的节点
@@ -60,5 +61,29 @@ public class KthNumInBST {
             }
         }
         return -1;
+    }
+
+    public int kthSmallest(TreeNode root, int k) {
+        if (k == 0) {
+            return 0;
+        }
+        Deque<TreeNode> stack =  new ArrayDeque<>();
+        TreeNode curNode = root;
+        int count = 0;
+        while(curNode != null || !stack.isEmpty()) {
+            if (curNode != null){
+                stack.push(curNode);
+                curNode = curNode.left;
+            } else {
+                TreeNode peekNode = stack.pop();
+                count++;
+                if ( count == k ) {
+                    return peekNode.val;
+                }
+                curNode = peekNode.right;
+            }
+        }
+        return -1;
+
     }
 }
