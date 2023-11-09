@@ -32,6 +32,27 @@ public class FillRain {
         return vol;
     }
 
+    /**
+     * 栈： 如果递减则入栈， 如果大于则出栈， 注意每次增加的是一层，所以不会累计重复， 即按行加上
+     */
+    public int trap7(int[] height) {
+       int i = 0;
+       int vol = 0;
+       Deque<Integer> stack = new ArrayDeque<>();
+       while (i < height.length) {
+           if (stack.isEmpty() || height[i] < height[stack.peek()]){
+               stack.push(i);
+           }
+           else {
+               int idxTop = stack.pop();
+               if (!stack.isEmpty()) {
+                   vol += ( Math.min(height[stack.peek()], height[i]) - height[idxTop] ) * (i - stack.peek()-1);
+               }
+           }
+       }
+       return vol;
+    }
+
 
     /**
      * 双指针，遍历一次， 那边低就去先处理那边， 处理时拿到记录的最大值，如果当前高度大于最高值则兜不住，更新最高值， 否则，按列加上即可，
@@ -63,6 +84,31 @@ public class FillRain {
     }
 
     /**
+     * 双指针： 动态规划优化， left 的leftMax一定是确定的， right 的rightMax一定是确定的
+     */
+    public int trap8(int[] height) {
+        int left = 0;
+        int right = height.length-1;
+        int leftMax = 0, rightMax = 0;
+        int vol = 0;
+        while(left < right) {
+            leftMax = Math.max(height[left], leftMax);
+            rightMax = Math.max(height[right], rightMax);
+            if (height[left] <= height[right]) {
+                vol += leftMax-height[left];
+                left++;
+            }
+            else {
+                vol += rightMax-height[right];
+                right--;
+            }
+        }
+        return vol;
+
+
+    }
+
+    /**
      * 动态规划： 和双指针的思想是一样的， 不过空间效率和时间较差。也是按列累加
      */
     public int trap3(int[] height) {
@@ -87,25 +133,33 @@ public class FillRain {
         }
         return vol;
     }
-
-    public int trap4(int[] height){
-        int  i = 0;
-        int vol = 0;
-        Deque<Integer> stack = new ArrayDeque<>();
-        while(i < height.length){
-            while(!stack.isEmpty() && height[i] > height[stack.peek()]){
-                int leftHand = stack.pop();
-                int bottom = height[leftHand];
-                if(stack.isEmpty())
-                    break;
-                int distance = i - stack.peek() - 1;
-                int depth = Math.min(height[stack.peek()], height[i]) - bottom;
-                vol += distance * depth;
-            }
-            stack.push(i++);
+    /**
+     * 动态规划： 对对于每一列计算可以承接的雨水
+     *   vol[i] = 1 * (math.Min(left, right)- height[i)， 所以只需要保存每个位置的边界信息即可，
+      */
+    public int trap5(int[] height) {
+        int[] leftMax = new int[height.length];
+        int[] rightMax = new int[height.length];
+        leftMax[0] = height[0];
+        rightMax[height.length-1] = height[height.length-1];
+        //保存边界信息(而不是每次都临时去两边查询看，最坏的情况是N2
+        for ( int i = 1 ; i < height.length; i++) {
+            leftMax[i] = Math.max(leftMax[i-1], height[i]);
         }
-        return vol;
 
+        for (int i = height.length-2; i>=0 ; i-- ) {
+            rightMax[i] = Math.max(rightMax[i+1], height[i]);
+        }
+
+        //计算
+        int vol = 0;
+        for (int i = 0 ; i< height.length; i++) {
+            int minBorder = Math.min(leftMax[i], rightMax[i]);
+            vol += minBorder - height[i];
+        }
+
+        return vol;
     }
+
 
 }

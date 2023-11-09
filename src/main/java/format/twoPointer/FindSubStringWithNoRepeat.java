@@ -14,25 +14,59 @@ public class FindSubStringWithNoRepeat {
     * 如果元素存在，判断是否上次出现位置在开始位置之后，
     * 如果之后，则需要更新开始位置，并更新当前最大值*/
     public int lengthOfLongestSubstring(String s) {
-        if(s.length() <= 1)
-            return s.length();
-        Map<Character, Integer> map = new HashMap<>();
+        char[] array = s.toCharArray();
+        int maxLength = 0;
+        Map<Character, Integer> chMap = new HashMap<>();
         int left = 0;
-        int max = 0;
-        for( int i = 0 ; i< s.length(); i++ ){
-            char ch = s.charAt(i);
-            if(map.containsKey(ch)) {
-                if (map.get(ch) >= left) {
-                    left = map.get(ch) + 1;
-                }
+        for(int i = 0; i < array.length; i++) {
+            if (!chMap.containsKey(array[i])) {
+                chMap.put(array[i], i);
             }
-            max = Math.max(i - left+1, max);
-            map.put(ch,i);
+            else {
+                // 更新最大长度
+                maxLength = Math.max(maxLength, i-left);
+                // map中去调重复元素之前的字符（实际上也可以不用去， 因为已经知道left范围了）
+                int cutIdx = chMap.get(array[i]);
+                while( left <= cutIdx ){
+                    chMap.remove(array[left]);
+                    left++;
+                }
+                chMap.put(array[i], i);
+            }
         }
-        return max;
+        // 循环后还需要看看(这里是容易出错的地方最好，最好再循环中判断好
+        maxLength = Math.max(maxLength, chMap.size());
+        return maxLength;
+
     }
+
+    /**
+     * 双指针 + 哈希 优化
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring2(String s) {
+        char[] array = s.toCharArray();
+        int maxLength = 0;
+        Map<Character, Integer> chMap = new HashMap<>();
+        int left = 0;
+        for(int i = 0; i < array.length; i++) {
+            if (chMap.containsKey(array[i])){
+                // 这个条件不可缺少， 因为没有删除数据所以要排除干扰
+                if (left <= chMap.get(array[i])) {
+                    left = chMap.get(array[i]) + 1;
+                }
+
+            }
+            chMap.put(array[i], i);
+            maxLength = Math.max(maxLength, i - left + 1);
+        }
+
+        return maxLength;
+    }
+
     /* 双指针 优化，当然本质没啥区别*/
-    public static int lengthOfLongestSubstring2(String s) {
+    public static int lengthOfLongestSubstring3(String s) {
         HashMap<Character,Integer> map = new HashMap<>();
         int left = 0;
         int temp = 0;

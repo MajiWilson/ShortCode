@@ -1,5 +1,6 @@
 package format.slide_window;
 
+import java.util.Deque;
 import java.util.LinkedList;
 
 /**
@@ -41,25 +42,36 @@ public class MaxInWindow {
      */
 
     public int[] maxSlidingWindow2(int[] nums, int k) {
-        if( nums==null || nums.length <2){
-            return nums;
+        int n = nums.length;
+        if( k > nums.length || nums.length == 0){
+            return new int[0];
         }
-        LinkedList<Integer> queue = new LinkedList<>();
-        int[] res = new int[nums.length - k +1];
-        for(int i = 0, j = 0;i < nums.length ; i++){
-            while(!queue.isEmpty() && nums[queue.peekLast()] <= nums[i]){
-                queue.pollLast();
+        // 第一个窗口特殊处理
+        int[] res = new int[n-k+1];
+        Deque<Integer> dequeue = new LinkedList<>();
+        for( int i = 0; i < k; i++) {
+            while(!dequeue.isEmpty() && nums[dequeue.peekLast()]  <= nums[i]) {
+                dequeue.pollLast();
             }
-            queue.offerLast(i);
-            if(queue.peekFirst() <= i - k ){
-                queue.pollFirst();
-            }
-            if(i >= k-1){
-                res[j++] = nums[queue.peekFirst()];
-            }
+            dequeue.offerLast(i);
         }
-        return res;
+        res[0] = nums[dequeue.peekFirst()];
 
+        // 维护更新后续窗口的值
+        for( int i = k; i < n; i++){
+            while(!dequeue.isEmpty() && nums[dequeue.peekLast()]  <= nums[i]) {
+                dequeue.pollLast();
+            }
+            dequeue.offerLast(i);
+
+            // 去调已经不再窗口范围内的数据
+            while(dequeue.peekFirst() < i - k + 1) {
+                dequeue.pollFirst();
+            }
+            res[i-k+1] = nums[dequeue.peekFirst()];
+        }
+
+        return res;
     }
 
 }
