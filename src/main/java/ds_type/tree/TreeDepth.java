@@ -8,6 +8,7 @@ import java.util.Queue;
 
 /**
  * 树高计算
+ * 等价与问题： 计算根节点到叶子节点的最大长度
  */
 public class TreeDepth {
 
@@ -49,6 +50,14 @@ public class TreeDepth {
            }
         }
         return depth;
+    }
+
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
 

@@ -11,6 +11,8 @@ public class FindCircleNode {
 
     /**
      * 快慢指针: 确定有环以后，快指针回到头节点，两者再次相遇的时候刚好在入口
+     *      假设线性和环分别是 a , c 长度则相遇时： 2(a + x)  = a + x + nc  => a + x  = nc ，
+     *      然后再次开始走： 分别走的是 a + mc  和 c - X  + kc  化简下就是  a + x = ？c, 所以刚好在入口再次相遇
      */
     public ListNode detectCycle(ListNode head) {
         if(head == null){
@@ -67,3 +69,4 @@ public class FindCircleNode {
         return fast;
     }
 }
+

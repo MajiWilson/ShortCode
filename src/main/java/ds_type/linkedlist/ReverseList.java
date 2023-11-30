@@ -1,6 +1,7 @@
 package ds_type.linkedlist;
 
 import entity.ListNode;
+import format.dp.Lis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,24 @@ public class ReverseList {
         head.next = null;
         return newHead;
     }
+
+
     /**
-     * 双指针： 一个指向新的链表头， 一个指向当前遍历节点，类似于头插法
+     * 递归2 实际上head 没有修改不需要保存tail
+     */
+    public static ListNode reverseTest(ListNode head) {
+        if(null == head || head.next == null){
+            return head;
+        }
+        ListNode tail = head.next;
+        ListNode newHead  = reverse(head.next);
+        tail.next = head;
+        head.next = null;
+
+        return newHead;
+    }
+    /**
+     * 双指针： 一个指向新的链表头， 一个指向当前遍历节点，类似于头插法, 原位头插法
      */
     public static ListNode reverseList3(ListNode head) {
        ListNode pre = null;
@@ -55,6 +72,18 @@ public class ReverseList {
            cur = temp;
        }
        return pre;
+    }
+
+    public static ListNode reverseListTest3(ListNode head) {
+        ListNode newList = null;
+        ListNode curNode = head;
+        while(curNode != null ){
+            ListNode nextNode = curNode.next;
+            curNode.next = newList;
+            newList = curNode;
+            curNode = nextNode;
+        }
+        return newList;
     }
 
 }

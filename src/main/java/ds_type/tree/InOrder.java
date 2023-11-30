@@ -82,6 +82,31 @@ public class InOrder {
 
     }
 
+    public List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null ){
+            return res;
+        }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode curNode = root;
+        while(curNode != null || !stack.isEmpty()){
+            while(curNode != null) {
+                stack.push(curNode);
+                curNode = curNode.left;
+            }
+            // curNode 为空， 且栈非空
+            if (!stack.isEmpty()){
+                // 出栈访问
+                TreeNode peekNode = stack.pop();
+                res.add(peekNode.val);
+                // 有孩子继续遍历
+                curNode = peekNode.right;
+            }
+        }
+        return res;
+
+    }
+
 
 
 }

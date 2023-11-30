@@ -48,4 +48,20 @@ public class SameNodeOfTwoList {
     /**
      * 第三种方法： 分别计算两者的长度，长的先走，然后一起边走边比较即可
      */
+
+
+    public ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
+        ListNode a = headA;
+        ListNode b = headB;
+
+        while( a != b) {
+            a = a == null ? headB : a.next;
+            b = b == null ? headA : b.next;
+        }
+
+        return a;
+    }
+
+
+
 }
