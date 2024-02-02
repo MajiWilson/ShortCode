@@ -33,7 +33,7 @@ public class ThreadDemo_Join_Interrupt {
             // 若不手动终止thread1，则thread1会继续执行，可能会造成一些数据同步上的问题。
             thread1.join();
         } catch (InterruptedException e) {
-            System.out.println(" main thread has interrupt: " + Thread.currentThread().getName());
+            System.out.println(" mainF thread has interrupt: " + Thread.currentThread().getName());
             thread1.interrupt();
         }
         System.out.println("main thread end");

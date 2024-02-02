@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/interview/java_base/Java.text" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/ArrayCenter.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_2_ShopList.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_3_NK.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/Array_4_LatestCatFood.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/ds_type/array/FindMod.java" charset="GBK" />
@@ -21,7 +21,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/DP_3_MaxSubSum2.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/DP_3_MaxSubSum3.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/DP_3_MinSubSum.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/format/dp/DP_3_MultiStageGraph.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/DP_3_SubArraySum.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/DP_4_MaxIncString.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/dp/Lcs.java" charset="GBK" />
@@ -39,7 +38,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/format/sort/QuickSort2.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/sort/RandomizedSelect.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/format/sort/ShellSort.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/format/sort/SortSimple.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/AccountWithSemaphore.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/AccountWithoutSync.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/java_language/thread/ConsumerAndProducer.java" charset="GBK" />

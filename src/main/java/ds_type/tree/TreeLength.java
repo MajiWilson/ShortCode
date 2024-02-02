@@ -8,9 +8,9 @@ import entity.TreeNode;
  */
 public class TreeLength {
 
-    public static int maxLength = 0;
+    public  int maxLength = 0;
 
-    public static int getLongestLength(TreeNode root){
+    public  int getLongestLength(TreeNode root){
         maxLength = 0;
         dfs(root);
         return maxLength;
@@ -24,7 +24,7 @@ public class TreeLength {
      * @param root
      * @return
      */
-    public static int dfs(TreeNode root){
+    public  int dfs(TreeNode root){
         if(root == null){
             return 0;
         }
@@ -35,4 +35,31 @@ public class TreeLength {
         }
         return leftMaxLength > rightMaxLength ? leftMaxLength + 1 : rightMaxLength +1 ;
     }
+
+    /**
+     * 如果是计算直径（两个节点视为长度 = 1 ，则需要注意这个DFS中不要+1
+     * @param root
+     * @return
+     */
+
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        maxLength = 0;
+        dfs(root);
+        return maxLength;
+    }
+
+    public int dfs2(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        int leftLength = dfs2(root.left);
+        int rightLength = dfs2(root.right);
+        //区别！
+        maxLength = Math.max(leftLength + rightLength, maxLength);
+        return Math.max(leftLength, rightLength) + 1;
+    }
+
+
+
 }

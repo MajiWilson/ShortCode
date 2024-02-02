@@ -38,7 +38,7 @@ public class FineOnlyRepeatNum {
         int left = 1;
         int right = len - 1;
         while (left < right) {
-            // 在 Java 里可以这么用，当 left + right 溢出的时候，无符号右移保证结果依然正确
+            // 在 Java.txt 里可以这么用，当 left + right 溢出的时候，无符号右移保证结果依然正确
             int mid = (left + right)/2;
             int cnt = 0;
             for (int num : nums) {

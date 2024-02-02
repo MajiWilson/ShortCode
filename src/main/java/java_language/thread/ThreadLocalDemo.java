@@ -22,11 +22,11 @@ public class ThreadLocalDemo {
         }
 
         public void run() {
-            System.out.println("线程" + index + "的初始value:" + value.get());
-            for (int i = 0; i < 10; i++) {
-                value.set(value.get() + i);
+            System.out.println("thread " + index + " INIT value:" + value.get());
+            for (int i = 1; i < index+1; i++) {
+                value.set(value.get() + 1);
             }
-            System.out.println("线程" + index + "的累加value:" + value.get());
+            System.out.println("thread " + index + " ACC value:" + value.get());
         }
     }
 }

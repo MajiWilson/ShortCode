@@ -84,4 +84,49 @@ public class FindMid2 {
         }
     }
 
+
+    public double findMedianSortedArrays2(int[] nums1, int[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        int leftMidK = (len1 + len2 + 1)/2;
+        int rightMidK = (len1 + len2)/2 + 1;
+        // 奇数情况下避免重复的查找
+        if ((len1 + len2)%2 == 1){
+            return getKth(nums1, 0, len1-1, nums2, 0, len2-1, leftMidK);
+        } else {
+            return (double) (getKth(nums1, 0, len1 - 1, nums2, 0, len2 - 1, leftMidK) +
+                    getKth(nums1, 0, len1 - 1, nums2, 0, len2 - 1, rightMidK)) /2;
+        }
+
+
+    }
+
+    private int getKth(int[] nums1, int start1, int end1, int[] nums2, int start2, int end2, int k) {
+        // 如果一个数组已经为空了直接返回另一个数组的第K个值
+        int len1 = end1-start1+1;
+        int len2 = end2-start2+1;
+        if(len1 == 0) {
+            return nums2[start2 + k - 1];
+        }
+        if(len2 == 0) {
+            return nums1[start1 + k - 1];
+        }
+        // 特殊处理， 因为mid == 0 没有什么意义了
+        if(k == 1){
+            return Math.min(nums1[start1], nums2[start2]);
+        }
+
+        //计算K/2的位置
+        int mid =  k/2;
+        int nums1MidIdx = Math.min(start1 + mid - 1, end1);
+        int nums2MidIdx = Math.min(start2 + mid - 1, end2);
+        if( nums1[nums1MidIdx] < nums2[nums2MidIdx]) {
+            // 舍弃nums1的前K/2个数(不一定是 k/2个，根据长度而定）
+            return getKth(nums1, nums1MidIdx+1, end1, nums2, start2, end2, k - (nums1MidIdx-start1+1));
+        } else {
+            return getKth(nums1, start1, end1, nums2, nums2MidIdx+1, end2, k - (nums2MidIdx-start2+1));
+        }
+
+    }
+
 }

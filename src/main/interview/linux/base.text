@@ -7,6 +7,26 @@
         网络吞吐率和 PPS（数据包为单位的传输速率）使用
     （4）ethtool
         查看带宽
+    （5）cat
+        查看文件
+    （6）chmod
+        设置权限
+        ls -lh 查看全新
+    （7）grep
+        文本搜索
+    （8）find
+        文件查找
+
+    （9）kill
+        杀死进程 KILL -9 pid强制
+    （10）su
+        切换用户
+    （11）top
+        查看占用CPU高的进程
+    （12）lsof
+        Linux查看端口号占用情况
+    （13）wc
+        字数统计
 
 
 linux 页缓存 page cache：

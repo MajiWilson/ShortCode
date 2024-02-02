@@ -24,7 +24,7 @@ class CountDemo{
     public static int getCount() throws InterruptedException {
         Lock lock = new ReentrantLock();
         lock .lock();
-        Thread.sleep(20000);
+        Thread.sleep(10000);
         lock.unlock();
         return i;
     }
@@ -42,13 +42,13 @@ class ThreadDemo extends Thread{
     @Override
     public void run(){
         for( int i = 0 ;i < 10 ; i++){
-            System.out.println("thread"+ index + " state :" + Thread.currentThread().getState());
+            System.out.println("thread"+ index + " start:" + Thread.currentThread().getState());
             try {
                 System.out.println("thread"+ index + " state :" + CountDemo.getCount());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("thread"+ index + " state :" + Thread.currentThread().getState());
+            System.out.println("thread"+ index + " end :" + Thread.currentThread().getState());
         }
 
     }

@@ -24,5 +24,31 @@ public class StairsClimb {
         return c;
     }
 
+    public int climbStairs2(int n) {
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for(int i = 2; i <=n; i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+
+    /**
+     * 空间进一步优化
+     * @param n
+     * @return
+     */
+    public int climbStairs3(int n) {
+        int lastSteps = 1;
+        int lastLastSteps = 1;
+        for(int i = 2; i <=n; i++){
+            int temp = lastSteps;
+            lastSteps = lastLastSteps + temp;
+            lastLastSteps = temp;
+        }
+        return lastSteps;
+    }
+
 
 }
